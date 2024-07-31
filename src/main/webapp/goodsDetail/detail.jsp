@@ -93,8 +93,8 @@ ul {
 .reportbtn {
 	position: sticky;
 	position: -webkit-sticky;
-	top: 99%;
-	left: 99%;
+	top: 90%;
+	left: 90%;
 	width: 350px;
 	text-align: right;;
 	float: right;
@@ -115,7 +115,7 @@ ul {
 	}
 	
 	function openReport(){
-		window.open('/webs/goodsDetail/report.jsp','report','width=400, height=500');
+		window.open('/wishJam/goodsDetail/report.jsp','report','width=400, height=500');
 	}
 </script>
 <body>
