@@ -43,8 +43,6 @@ section {
 	margin-top: 80px;
 }
 
-
-
 .mypage_item {
 	width: 223px;
 	height: 380px;
@@ -56,7 +54,7 @@ section {
 
 #mypage_section2 {
 	height: 200px;
-	border:1px solid red;
+	border: 1px solid red;
 	text-align: center;
 }
 
@@ -103,6 +101,17 @@ section {
 			</div>
 		</article>
 
+
+		<article>
+			<h3>구매내역</h3>
+			<hr>
+			<div id="celllist_wrap">
+				<div class="mypage_item"></div>
+				<div class="mypage_item"></div>
+				<div class="mypage_item"></div>
+				<div class="mypage_item rightbox"></div>
+			</div>
+		</article>
 	</section>
 </body>
 </html>
