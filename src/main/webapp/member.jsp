@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>위시잼 - 회원가입</title>
 </head>
 <body>
-<h2>test</h2>
+
 </body>
 </html>
