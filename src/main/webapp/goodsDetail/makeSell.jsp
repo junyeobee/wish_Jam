@@ -44,7 +44,7 @@ ul {
 	function addsale() {
 		var salebtn = document.getElementById('addsale');
 		if (salebtn.checked) {
-			document.getElementById('salebox').innerHTML = '<h3>a</h3>';
+			document.getElementById('salebox').innerHTML = '<jsp:include page="moreFunc.jsp"/>';
 		} else {
 			document.getElementById('salebox').innerHTML='';
 		}
@@ -132,7 +132,7 @@ ul {
 					<ul>
 						<li><input type="checkbox" id="addsale" onclick="addsale()">할인
 							기능
-							<div id="salebox"></div></li>
+							<div id="salebox">aa</div></li>
 					</ul>
 				</li>
 			</ul>
