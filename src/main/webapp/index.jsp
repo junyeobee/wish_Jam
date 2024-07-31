@@ -5,24 +5,6 @@
 <head>
 <!-- 임의로 넣은값입니다 변경예정 -->
 <style>
-	@font-face {
-	    font-family: 'Cafe24Ohsquare';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-	@font-face {
-	    font-family: 'Cafe24Ohsquareair';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-	@font-face {
-	    font-family: 'Cafe24Ssurround';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
 	header{
 		width:1500px;
 		height:200px;
@@ -92,6 +74,7 @@
 		padding : 100px 0;
 	}
 </style>
+<link rel="stylesheet" href="css/allFonts.css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
