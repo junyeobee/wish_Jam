@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 <!-- 임의로 넣은값입니다 변경예정 -->
 <style>
 header {
@@ -94,48 +93,13 @@ footer {
 }
 </style>
 <link rel="stylesheet" href="css/allFonts.css" />
-=======
 <link rel="stylesheet" href="/wishJam/css/burger.css" />
 <link rel="stylesheet" href="/wishJam/css/index.css" />
 <link rel="stylesheet" href="/wishJam/css/allFonts.css" />
->>>>>>> origin/master
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-	<header>
-		<div id="top_menu">
-			<label>메뉴 들어갈 곳</label>
-		</div>
-		<div id="top_left">
-			<a href="index.jsp">메인</a>
-		</div>
-		<div id="top_center">
-			<form action="">
-				<input type="text" id="top_Search" /> <input type="button"
-					value="검색" />
-			</form>
-		</div>
-		<div id="top_right">
-			<a href="login.jsp">로그인</a> | <a href="memjoin.jsp">회원 가입</a>
-		</div>
-	</header>
-	<section>
-		<article>
-			<div>
-				<h1 id="test1">제목</h1>
-			</div>
-			<div id="contentBox">배너들어갈곳</div>
-		</article>
-		<article>
-			<h2>인기상품</h2>
-			<div class="listBox">
-				<div class="list">
-					<label id="1">상품이미지</label>
-				</div>
-				<div class="list">상품이미지</div>
-=======
 <%@ include file="header.jsp" %>
 	<section>
 		<article>
@@ -149,7 +113,6 @@ footer {
 			<div class = "listBox">
 				<div class="list"><label id = "1">상품이미지</label></div>
 				<div class="list"><a href="/wishJam/goodsDetail/detail.jsp">상품이미지</a></div>
->>>>>>> origin/master
 				<div class="list">상품이미지</div>
 				<div class="list">상품이미지</div>
 			</div>
