@@ -1,12 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+section {
+  font-family: 'Cafe24Ssurround';
+	width: 940px;
+	height: 2000px;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+
+#filter {
+	float: right;
+}
+
+.container {
+	width: 100%;
+	height: 700px;
+	display: flex;
+	margin-top: 100px;
+	flex-wrap: wrap;
+}
+
+.item {
+	width: 223px;
+	height: 380px;
+	margin-right: 13px;
+	margin-bottom: 30px;
+	border: 1px solid blue;
+	position: relative;
+}
+
+.rightbox {
+	margin-right: 0;
+}
+
+.inner {
+	width: 100%;
+	height: 140px;
+	border: 1px solid red;
+	position: absolute;
+	bottom: 0;
+}
+
+#select_2 {
+	width: 130px;
+	height: 50px;
+}
+.img img{
+
+width:100%;
+height:240px;
+}
+
+</style>
 </head>
 <body>
+	<section>
+		<h2>전체 상품</h2>
+		<article>
+			<div id="filter">
+				<select name="select2" id="select_2">
+					<option value="all">인기순</option>
+					<option value="all">최신순</option>
+				</select>
+			</div>
+		</article>
 
+
+
+
+		<div class="wrapper">
+			<div class="container">
+
+				<div class="item ">
+				<div class="img"><img src="/wishJam/img/img2.jpeg" alt="a"></div>
+					<div class="inner">
+						<div>작가</div>
+						<div>제목</div>
+						<div>가격</div>
+					</div>
+				</div>
+
+				<div class="item "><div class="img"><img src="img/img1.jpg"></div>
+					<div class="inner">
+						<div>작가</div>
+						<div>제목</div>
+						<div>가격</div>
+					</div>
+				</div>
+				<div class="item ">
+					<div class="inner">
+						<div>작가</div>
+						<div>제목</div>
+						<div>가격</div>
+					</div>
+				</div>
+				<div class="item rightbox">
+					<div class="inner">
+						<div>작가</div>
+						<div>제목</div>
+						<div>가격</div>
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="inner">
+						<div>작가</div>
+						<div>제목</div>
+						<div>가격</div>
+					</div>
+				</div>
+				<div class="item item6 "></div>
+				<div class="item item7"></div>
+				<div class="item item8  rightbox"></div>
+				<div class="item item8 "></div>
+			</div>
+		</div>
+
+	</section>
 </body>
 </html>
