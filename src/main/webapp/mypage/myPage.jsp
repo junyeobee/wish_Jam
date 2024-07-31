@@ -5,16 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
 <style>
 section {
 	width: 940px;
 	margin: 0 auto;
+	font-family: 'Pretendard-Regular';
 }
 
 #mypage_section1 {
 	width: 100%;
-	height: 350px;
+	height: 250px;
 	border: 1px solid red;
 }
 
@@ -29,18 +30,19 @@ section {
 }
 
 .profile_item {
-	height: 30px;
+	height: 20px;
 	width: 100%;
 	text-align: center;
 }
 
-.profileimg {
-	width: 100px;
-	height: 100px;
+.profileimg img {
+	width: 80px;
+	height: 80px;
 	border-radius: 100px;
 	background-color: gray;
 	text-align: center;
 	margin-top: 80px;
+	
 }
 
 .mypage_item {
@@ -66,6 +68,27 @@ section {
 .rightbox {
 	margin-right: 0;
 }
+
+h2 {
+	color: black;
+	font-family: 'Cafe24Ssurround';
+}
+
+h3 {
+	color: black;
+	font-family: 'Cafe24Ssurround';
+}
+
+.nickname {
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.introduce {
+	font-weight: 500;
+	font-size: 18px;
+	margin-top: 10%;
+}
 </style>
 </head>
 <body>
@@ -76,16 +99,20 @@ section {
 		<article id="mypage_section1">
 
 			<div id="mypage_wrap">
-				<div class="profileimg"></div>
-				<div class="profile_item">닉네임</div>
 				<div class="profile_item">등급</div>
+				<div class="profileimg">
+					<img src="/wishJam/img/profile.png">
+				</div>
+				<div class="profile_item nickname">닉네임</div>
+				<div class="profile_item edit">정보 수정하기</div>
+
 			</div>
 
 		</article>
 
 
 		<article id="mypage_section2">
-			<div>자기소개를 작성해주세요 !</div>
+			<div class="introduce">소개글을 작성해주세요 !</div>
 
 		</article>
 
@@ -112,6 +139,7 @@ section {
 				<div class="mypage_item rightbox"></div>
 			</div>
 		</article>
+		
 	</section>
 </body>
 </html>

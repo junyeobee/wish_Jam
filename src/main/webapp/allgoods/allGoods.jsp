@@ -5,16 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
 <style>
-@font-face {
-    font-family: 'Cafe24Ssurround';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 section {
-  font-family: 'Cafe24Ssurround';
+	font-family: 'Pretendard-Regular';
 	width: 940px;
 	height: 2000px;
 	border: 1px solid black;
@@ -40,6 +34,7 @@ section {
 	margin-bottom: 30px;
 	border: 1px solid blue;
 	position: relative;
+	border-radius: 20px;
 }
 
 .rightbox {
@@ -54,16 +49,42 @@ section {
 	bottom: 0;
 }
 
+.inner div {
+	margin-bottom: 4px;
+}
+
 #select_2 {
 	width: 130px;
 	height: 50px;
 }
-.img img{
 
-width:100%;
-height:240px;
+.img img {
+	width: 100%;
+	height: 240px;
+	object-fit: cover;
+	border-radius: 20px 20px 0 0;
 }
 
+.heart {
+	width: 32px;
+	height: 30px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+h2 {
+	font-family: 'Cafe24Ssurround';
+}
+
+.discount {
+	color: #FF4900;
+}
+
+.writer {
+	font-size: 14px;
+	color: #747474;
+}
 </style>
 </head>
 <body>
@@ -85,21 +106,31 @@ height:240px;
 			<div class="container">
 
 				<div class="item ">
-				<div class="img"><img src="/wishJam/img/img2.jpeg" alt="a"></div>
+					<div class="img">
+						<img src="/wishJam/img/img2.jpeg" alt="a">
+					</div>
 					<div class="inner">
-						<div>작가</div>
-						<div>제목</div>
-						<div>가격</div>
+						<div class="nickname">봉구봉구</div>
+						<div>캐릭터 인형</div>
+						<div>
+							<span class="discount">10%</span>15,000
+						</div>
+						<span class="heart"><img src="/wishJam/img/heart.png"></span>
 					</div>
 				</div>
 
-				<div class="item "><div class="img"><img src="img/img1.jpg"></div>
+				<div class="item ">
+					<div class="img">
+						<img src="/wishJam/img/img1.jpg">
+					</div>
 					<div class="inner">
-						<div>작가</div>
+						<div class="writer">작가</div>
 						<div>제목</div>
 						<div>가격</div>
+						<span class="heart"><img src="/wishJam/img/heart_gray.png"></span>
 					</div>
 				</div>
+
 				<div class="item ">
 					<div class="inner">
 						<div>작가</div>
@@ -107,14 +138,16 @@ height:240px;
 						<div>가격</div>
 					</div>
 				</div>
+
 				<div class="item rightbox">
 					<div class="inner">
 						<div>작가</div>
 						<div>제목</div>
 						<div>가격</div>
+						<span class="heart"><img src="/wishJam/img/heart_gray.png"></span>
 					</div>
 				</div>
-				
+
 				<div class="item">
 					<div class="inner">
 						<div>작가</div>
@@ -127,6 +160,8 @@ height:240px;
 				<div class="item item8  rightbox"></div>
 				<div class="item item8 "></div>
 			</div>
+
+
 		</div>
 
 	</section>
