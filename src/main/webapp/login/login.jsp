@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/wishJam/css/allFonts.css" />
+<link rel="stylesheet" href="/wishJam/css/index.css" />
 <meta charset="UTF-8">
 <title>위시잼 - 로그인</title>
 <style>
@@ -19,6 +21,7 @@
       border-radius: 10px;
       text-align: center;
       padding-top: 45px;
+      font-family: 'Cafe24Ohsquareair';
     }
     
     .input_txt {
@@ -45,6 +48,7 @@
       font-weight: 400;
       -webkit-appearance: none;
       cursor: pointer;
+      font-family: 'Cafe24Ohsquareair';
     }
     
     .l_join{
@@ -58,10 +62,12 @@
       font-weight: 400;
       -webkit-appearance: none;
       cursor: pointer;
+      font-family: 'Cafe24Ohsquareair';
     }
     
     .l_saveid{
     	text-align: left;
+    	font-family: 'Cafe24Ohsquareair';
     }
     
     .login_noti {
@@ -71,18 +77,22 @@
       line-height: 180%;
       margin-top: 30px;
       padding-bottom: 40px;
+      font-family: 'Cafe24Ohsquareair';
     }
     
     a {
       text-decoration: none;
+      font-family: 'Cafe24Ohsquareair';
     }
     
 </style>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="login_wrap">
 	<div class="login_box">
 		<h2 style="color:#ff4900;">L O G I N</h2>
+		<form class="login_form" action="../index.jsp">
 		<div style="margin-top:50px;">
 			<input type="text" class="input_txt" name="user_id" value="아이디를 입력해주세요" onfocus="this.value='';">
 		</div>
@@ -95,20 +105,22 @@
 		<div style="margin-top:25px;">
 			<input type="submit" class="l_check" value="로그인">
 		</div>
+		</form>
 		<div style="margin-top:10px;">
 			<a href="member.jsp"><input type="button" class="l_join" value="회원가입"></a>
 		</div>
 		<div style="text-align:center; margin-top:15px; font-size:14px; ">
-			<a href="#"><span style="color:#696969;">아이디 찾기</span></a>
+			<a href="find_id.jsp"><span style="color:#696969;">아이디 찾기</span></a>
 			<span style="color:#696969; font-size:12px; vertical-align: 2px; margin:0 9px;">|</span>
-			<a href="#"><span style="color:#696969;">비밀번호 찾기</span></a>
+			<a href="find_pwd.jsp"><span style="color:#696969;">비밀번호 찾기</span></a>
 		</div>	
 		<!-- 정책 -->
 		<div class="login_noti">
 			* 회원가입시 다양한 혜택을 누릴 수 있습니다 <br>
-			* 하나의 휴대폰 번호로는 하나의 계정만 생성할 수 있습니다 
+			* 하나의 휴대폰 번호로 하나의 계정만 생성할 수 있습니다 
 		</div>
 	</div>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
