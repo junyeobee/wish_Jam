@@ -42,7 +42,6 @@ section {
 	background-color: gray;
 	text-align: center;
 	margin-top: 80px;
-	
 }
 
 .mypage_item {
@@ -139,7 +138,7 @@ h3 {
 				<div class="mypage_item rightbox"></div>
 			</div>
 		</article>
-		
+
 	</section>
 </body>
 </html>
