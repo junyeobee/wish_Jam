@@ -2,7 +2,12 @@
     pageEncoding="UTF-8"%>
 <header>
 	<div id = "top_menu">
-		<label>메뉴 들어갈 곳</label>
+		<label class="burger" for="burger">
+		  <input type="checkbox" id="burger">
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		</label>
 	</div>
 	<div id = "top_left">
 		<a href="index.jsp">메인</a>

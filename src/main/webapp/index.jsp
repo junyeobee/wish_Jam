@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/wishJam/css/burger.css" />
 <link rel="stylesheet" href="/wishJam/css/index.css" />
 <link rel="stylesheet" href="/wishJam/css/allFonts.css" />
 <meta charset="UTF-8">
