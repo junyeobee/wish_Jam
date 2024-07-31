@@ -121,7 +121,7 @@
 			<h2>인기상품</h2>
 			<div class = "listBox">
 				<div class="list"><label id = "1">상품이미지</label></div>
-				<div class="list">상품이미지</div>
+				<div class="list"><a href="/wishJam/goodsDetail/detail.jsp">상품이미지</a></div>
 				<div class="list">상품이미지</div>
 				<div class="list">상품이미지</div>
 			</div>
