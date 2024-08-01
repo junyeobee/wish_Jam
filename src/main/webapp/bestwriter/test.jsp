@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
-
 <style>
 section {
 	font-family: 'Pretendard-Regular';
@@ -89,43 +87,9 @@ h3 {
 	margin-bottom: 5px;
 	text-align: center;
 }
-
-.hidden{
-display:none;
-}
 </style>
-
-<script>
-function show(){
-
-
-}
-
-</script>
 </head>
 <body>
-<%@include file="../header.jsp"%>
-	
-	<section id="main-content">
-
-		<!-- 상단 태그 -->
-		<h2>베스트 작가</h2>
-
-		<article id="seller_tg">
-			<div onclick="seller">작가이름</div>
-			<div><a href="?page=bestSeller_tag">작가이름</a></div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-		</article>
-
-
-
 		<article>
 
 			<div class="seller_pf_wrap">
@@ -192,20 +156,6 @@ function show(){
 				<div class="bw_item rightbox"></div>
 			</div>
 		</article>
-
-
-	</section>
-	
-	
-  <section id="author-works" class="hidden">
-        <h2 id="author-title"></h2>
-        <div id="works-list">
-            작가 작품
-        </div>
-    </section>
-	
-	
-
 
 </body>
 </html>
