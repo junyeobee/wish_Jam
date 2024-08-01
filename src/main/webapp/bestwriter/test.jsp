@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,7 @@
 section {
 	font-family: 'Pretendard-Regular';
 	width: 940px;
-	height: 2000px;
-	border: 1px solid black;
+	height: 1500px;
 	margin: 0 auto;
 }
 
@@ -29,14 +28,14 @@ h2 {
 
 #selllist_wrap {
 	width: 100%;
-	height: 200px;
+	height: 210px;
 	border: 1px solid gray;
 	display: flex;
 }
 
 .bw_item {
-	width: 200px;
-	height: 100%;
+	width: 210px;
+	height: 210px;
 	border: 1px solid gray;
 	background-image: url("/wishJam/img/img1.jpg");
 	background-size: cover;
@@ -90,6 +89,13 @@ h3 {
 </style>
 </head>
 <body>
+
+
+	<section>
+
+
+
+
 		<article>
 
 			<div class="seller_pf_wrap">
@@ -121,11 +127,19 @@ h3 {
 				<h3>작가 이름</h3>
 			</div>
 
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
+			<div id="selllist_wrap">
+				<div class="bw_item">
+					<span class="rank">1</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">2</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">3</span>
+				</div>
+				<div class="bw_item rightbox">
+					<span class="rank">4</span>
+				</div>
 			</div>
 		</article>
 
@@ -135,11 +149,19 @@ h3 {
 				<h3>작가 이름</h3>
 			</div>
 
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
+			<div id="selllist_wrap">
+				<div class="bw_item">
+					<span class="rank">1</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">2</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">3</span>
+				</div>
+				<div class="bw_item rightbox">
+					<span class="rank">4</span>
+				</div>
 			</div>
 		</article>
 
@@ -149,13 +171,22 @@ h3 {
 				<h3>작가 이름</h3>
 			</div>
 
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
+			<div id="selllist_wrap">
+				<div class="bw_item">
+					<span class="rank">1</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">2</span>
+				</div>
+				<div class="bw_item">
+					<span class="rank">3</span>
+				</div>
+				<div class="bw_item rightbox">
+					<span class="rank">4</span>
+				</div>
 			</div>
 		</article>
+	</section>
 
 </body>
 </html>
