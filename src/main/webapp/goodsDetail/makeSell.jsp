@@ -39,16 +39,83 @@ ul {
 	padding: 0;
 	margin: 0;
 }
+
+.bordbox {
+	border: 1px solid gray;
+}
+
+.editbox {
+	margin: 0 auto;
+	width: 600px;
+
+	border: 1px solid gray;
+	padding: 15px;
+}
+
+.txtimg {
+	width: 400px;
+	object-fit: cover;
+}
+
+.txtimg:hover{
+cursor: pointer;
+}
+
+#txt:focus {
+	outline: 0;
+}
 </style>
 <script>
 	function addsale() {
 		var salebtn = document.getElementById('addsale');
+		var salebox = document.getElementById('salebox');
 		if (salebtn.checked) {
-			document.getElementById('salebox').innerHTML = '<jsp:include page="moreFunc.jsp"/>';
+			salebox.style.display = "block";
 		} else {
-			document.getElementById('salebox').innerHTML='';
+			salebox.style.display = "none";
 		}
 
+	}
+
+	function addterm(v) {
+		var duebox = document.getElementById("duebox");
+
+		if (v == "term") {
+			duebox.style.display = "block";
+		} else if (v == "every") {
+			duebox.style.display = "none";
+		}
+	}
+
+	function boldSelected() {
+		var selected = document.getSelection().toString();
+		var content = document.getElementById("txt");
+
+		if ((content.innerHTML).indexOf(selected)) {
+			console.log('aa');
+		}
+
+		var arr = (content.innerHTML).split(selected);
+		var ad = arr[0] + '<span style="font-weight: bold;">' + selected
+				+ '</span>' + arr[1];
+
+		//content.innerHTML=content.innerHTML;
+		console.log(selected + "/" + content.innerHTML);
+
+	}
+
+	function upImage(v) {
+		var file = document.getElementById("uploadImg").files[0];
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			var page = document.getElementById("page");
+			var content = document.getElementById("txt");
+
+			content.innerHTML += '<div><img class="txtimg" src="'+reader.result+'"></div>';
+		}
+
+		reader.readAsDataURL(file);
 	}
 </script>
 </head>
@@ -70,23 +137,35 @@ ul {
 				<li>상세 설명
 					<div>
 						<div>
-							<input type="button" value="B">
+							<ul>
+								<li><input type="button" value="B" onclick="boldSelected()"></li>
+								<li><input type="file" id="uploadImg" accept="image/*"
+									onChange="upImage(this.value)"></li>
+							</ul>
 						</div>
-						<textarea>텍스트에어리어</textarea>
+						<div class="editbox">
+							<div style="text-align: left; cursor: text;">
+								<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서,
+									아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
+							</div>
+						</div>
 					</div>
 				</li>
-				<li class="fbox fcenter">기간
+				<li>
 					<div>
+						<input type="radio" name="termbtn" value="every"
+							onclick="addterm(this.value)" checked>상시 판매 <input
+							type="radio" name="termbtn" value="term"
+							onclick="addterm(this.value)">기간 판매
+					</div>
+					<div id="duebox" class="fbox fcenter" style="display: none;">
 						<select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
-						</select>
-					</div> ~
-					<div>
-						<select>
+						</select> ~ <select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
@@ -132,16 +211,46 @@ ul {
 					<ul>
 						<li><input type="checkbox" id="addsale" onclick="addsale()">할인
 							기능
-							<div id="salebox">aa</div></li>
+							<div id="salebox" style="display: none;" class="bordbox">
+								<input type="checkbox">전체 선택
+								<ul>
+									<li><div class="bordbox">
+											<ul class="fbox fcenter">
+												<li><input type="checkbox"></li>
+												<li>이름</li>
+												<li>가격</li>
+											</ul>
+										</div></li>
+									<li><div class="bordbox">
+											<ul class="fbox fcenter">
+												<li><input type="checkbox"></li>
+												<li>이름</li>
+												<li>가격</li>
+											</ul>
+										</div></li>
+									<li>
+										<div>
+											할인률 <select>
+												<option>10%</option>
+												<option>20%</option>
+												<option>30%</option>
+												<option>40%</option>
+												<option>50%</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+							</div></li>
 					</ul>
 				</li>
 			</ul>
 		</article>
-		<article>
-			<ul class="fbox fcenter">
-				<li><input type="button" value="취소">
-				<li><input type="button" value="등록">
-			</ul>
+		<article style="position: fixed; bottom: 0;">
+			<table class="fbox fcenter">
+				<tr>
+					<td><input type="button" value="취소"></td>
+					<td><input type="button" value="등록"></td>
+			</table>
 		</article>
 	</section>
 </body>

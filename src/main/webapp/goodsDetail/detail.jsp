@@ -197,12 +197,6 @@ ul {
 				condimentum mollis tortor. Duis a cursus ipsum. Nam orci purus,
 				porttitor et lorem quis, lacinia auctor sem. Curabitur eu turpis in
 				orci faucibus scelerisque. Donec a leo felis.</div>
-			<div>Donec nisl sapien, tincidunt et dignissim et, porttitor
-				vitae sem. Sed eros nibh, accumsan suscipit elementum in, auctor a
-				arcu. Proin consectetur pharetra suscipit. Aliquam eu ante
-				dignissim, feugiat risus ut, cursus velit. Nam euismod dignissim
-				ligula in suscipit. Donec mattis metus sit amet tellus tempor
-				porttitor quis ut urna. Aenean bibendum congue dolor nec sagittis.</div>
 			<img src="../img/img1.jpg" class="conimg">
 		</article>
 		<article>
