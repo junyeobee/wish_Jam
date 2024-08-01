@@ -1,11 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String name = "ㅎㅇ";
+%>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bar Graph</title>
 <style>
 	.chart {
 	    display: flex;
@@ -31,9 +28,8 @@
 	}
 </style>
 </head>
-<body>
+<div>
+	<h1>통계</h1>
 	<div id="barChart" class="chart"></div>
 	<script src="script.js"></script>
-</body>
-</html>
-
+</div>

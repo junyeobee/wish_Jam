@@ -83,22 +83,22 @@
             <div id = "managerExplane">관리자 이름 님</div>
         </div>
         <div class="element">
-            <a href="#" data-content="test1" class="dynamic-link">통계</a>
+            <a href="#" data-content="stats" class="dynamic-link">통계</a>
         </div>
         <div class="element">
-            <a href="#" data-content="test2" class="dynamic-link">회원관리</a>
+            <a href="#" data-content="memberManage" class="dynamic-link">회원관리</a>
         </div>
         <div class="element">
-            <a href="#" data-content="test3" class="dynamic-link">신고 관리</a>
+            <a href="#" data-content="report" class="dynamic-link">신고 관리</a>
         </div>
         <div class="element">
-            <a href="#" data-content="test4" class="dynamic-link">배너 설정</a>
+            <a href="#" data-content="banner" class="dynamic-link">배너 설정</a>
         </div>
         <div class="element">
-            <a href="#" data-content="test5" class="dynamic-link">등급 관리</a>
+            <a href="#" data-content="grade" class="dynamic-link">등급 관리</a>
         </div>
         <div class="element">
-            <a href="#" data-content="test6" class="dynamic-link">ㅇㅇ</a>
+            <a href="#" data-content="dd" class="dynamic-link">무슨기능넣을까요</a>
         </div>
     </div>
     <section id="manageArea">
