@@ -103,7 +103,7 @@ h3 {
 					<img src="/wishJam/img/profile.png">
 				</div>
 				<div class="profile_item nickname">닉네임</div>
-				<div class="profile_item edit">정보 수정하기</div>
+				<div class="profile_item edit" onclick="location.href='/wishJam/mypage/mypageEdit.jsp'">정보 수정하기</div>
 
 			</div>
 

@@ -11,7 +11,7 @@
 section {
 	font-family: 'Pretendard-Regular';
 	width: 940px;
-	height: 2000px;
+	height: 1500px;
 	border: 1px solid black;
 	margin: 0 auto;
 }
@@ -93,16 +93,37 @@ h3 {
 .hidden{
 display:none;
 }
+
+   iframe {
+        width: 100%;
+        height:100%;
+        border: none;
+       overflow:hidden;
+    }
 </style>
 
 <script>
-function show(){
+document.addEventListener('DOMContentLoaded', function() {
+    const dynamicLinks = document.querySelectorAll('.dynamic-link');
+    dynamicLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const content = this.getAttribute('data-content');
+            if (content) {
+                loadContent(content);
+            }
+        });
+    });
+});
 
-
+function loadContent(content) {
+    const fileName = content + '.jsp';
+    document.getElementById('contentFrame').src = fileName;
 }
-
 </script>
 </head>
+
+
 <body>
 <%@include file="../header.jsp"%>
 	
@@ -110,10 +131,9 @@ function show(){
 
 		<!-- 상단 태그 -->
 		<h2>베스트 작가</h2>
-
 		<article id="seller_tg">
-			<div onclick="seller">작가이름</div>
-			<div><a href="?page=bestSeller_tag">작가이름</a></div>
+			<div >작가이름</div>
+			<div><a href="#" data-content="bestSeller_tag" class="dynamic-link">작가이름</a></div>
 			<div>작가이름</div>
 			<div>작가이름</div>
 			<div>작가이름</div>
@@ -126,85 +146,10 @@ function show(){
 
 
 
-		<article>
-
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="selllist_wrap">
-				<div class="bw_item">
-					<span class="rank">1</span>
-				</div>
-				<div class="bw_item">
-					<span class="rank">2</span>
-				</div>
-				<div class="bw_item">
-					<span class="rank">3</span>
-				</div>
-				<div class="bw_item rightbox">
-					<span class="rank">4</span>
-				</div>
-			</div>
-
-
-		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
-			</div>
-		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
-			</div>
-		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
-			</div>
-		</article>
-
-
+  <iframe scrolling="no" id="contentFrame" src="test.jsp"></iframe>
 	</section>
 	
-	
-  <section id="author-works" class="hidden">
-        <h2 id="author-title"></h2>
-        <div id="works-list">
-            작가 작품
-        </div>
-    </section>
-	
-	
+
 
 
 </body>

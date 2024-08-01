@@ -38,7 +38,7 @@ section {
 	height: 150px;
 	display: flex;
 	flex-wrap: wrap;
-	border: 1px solid red;
+
 }
 
 #article_edit3 {
@@ -46,13 +46,13 @@ section {
 	height: 150px;
 	display: flex;
 	flex-wrap: wrap;
-	border: 1px solid red;
+
 }
 
 #article_edit4 {
 	width: 100%;
 	height: 150px;
-	border: 1px solid red;
+
 	position: relative;
 }
 
@@ -93,7 +93,7 @@ section {
 	height: 70px; 
 	border : 1px solid blue;
 	position: relative;
-	border: 1px solid blue;
+
 }
 
 .input_wrap2 {
@@ -101,7 +101,7 @@ section {
 	height: 150px; 
 	border : 1px solid blue;
 	position: relative;
-	border: 1px solid blue;
+
 }
 .introduce input {
 	width: 360px;
@@ -124,7 +124,30 @@ section {
 }
 </style>
 
+<script>
+$("#img__preview").on("change", function(e){ // change는 변화감지 , e는 이벤트를 전달받음
+	var f = e.target.files[0];
+	if(!f.type.match("image*")){ //match도 사용 가능
+		$("#img__preview").val("");
+		alert('이미지만 첨부할 수 있습니다.');
+		
+		}
+	
+	var reader = new FileReader();
+	reader.onload = function(e){ 
+		$("#img__wrap").attr("src", e.target.result); //이미지가 담김 
+		// 이때 e 실행가능, 밑에 있으면 못찾을 수 있다. 위에 작성, 다운로드 완료시 콜백
+			
+		}
+	reader.readAsDataURL(f); // 비동기적으로 실행
+[출처] JSP 웹페이지 실습 (18) 프로필 사진 업로드 및 변경|작성자 김효선
 
+
+
+
+
+
+</script>
 
 </head>
 
@@ -133,7 +156,7 @@ section {
 <body>
 
 	<section>
-
+<form name="mypageedit" action="mypageEdit_of.jsp">
 		<div class="title">
 			<h2>내 정보 수정하기</h2>
 		</div>
@@ -188,7 +211,7 @@ section {
 		</article>
 
 	</section>
-
+</form>
 
 
 </body>

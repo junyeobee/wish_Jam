@@ -10,8 +10,7 @@
 section {
 	font-family: 'Pretendard-Regular';
 	width: 920px;
-	height: 2000px;
-	border: 1px solid black;
+	height: 1500px;
 	margin: 0 auto;
 }
 
@@ -89,9 +88,9 @@ h3 {
 	margin-bottom: 5px;
 	text-align: center;
 }
-.rightbox{
-margin-right:0;
 
+.rightbox {
+	margin-right: 0;
 }
 </style>
 </head>
@@ -100,7 +99,7 @@ margin-right:0;
 		<article>
 			<div class="seller_pf_wrap">
 				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
+				<h3>작가 이름2222</h3>
 			</div>
 
 			<div id="selllist_wrap">
@@ -115,7 +114,7 @@ margin-right:0;
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
-					<div class="bw_item rightbox"></div>
+				<div class="bw_item rightbox"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
