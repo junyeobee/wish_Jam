@@ -5,12 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
 
 <style>
 section {
 	font-family: 'Pretendard-Regular';
-	width: 940px;
+	width: 920px;
 	height: 2000px;
 	border: 1px solid black;
 	margin: 0 auto;
@@ -31,14 +30,15 @@ h2 {
 
 #selllist_wrap {
 	width: 100%;
-	height: 200px;
+	height: 900px;
 	border: 1px solid gray;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .bw_item {
-	width: 200px;
-	height: 100%;
+	width: 210px;
+	height: 210px;
 	border: 1px solid gray;
 	background-image: url("/wishJam/img/img1.jpg");
 	background-size: cover;
@@ -89,123 +89,39 @@ h3 {
 	margin-bottom: 5px;
 	text-align: center;
 }
+.rightbox{
+margin-right:0;
 
-.hidden{
-display:none;
 }
 </style>
-
-<script>
-function show(){
-
-
-}
-
-</script>
 </head>
 <body>
-<%@include file="../header.jsp"%>
-	
-	<section id="main-content">
-
-		<!-- 상단 태그 -->
-		<h2>베스트 작가</h2>
-
-		<article id="seller_tg">
-			<div onclick="seller">작가이름</div>
-			<div><a href="?page=bestSeller_tag">작가이름</a></div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-			<div>작가이름</div>
-		</article>
-
-
-
+	<Section>
 		<article>
-
 			<div class="seller_pf_wrap">
 				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
 				<h3>작가 이름</h3>
 			</div>
 
 			<div id="selllist_wrap">
-				<div class="bw_item">
-					<span class="rank">1</span>
-				</div>
-				<div class="bw_item">
-					<span class="rank">2</span>
-				</div>
-				<div class="bw_item">
-					<span class="rank">3</span>
-				</div>
-				<div class="bw_item rightbox">
-					<span class="rank">4</span>
-				</div>
-			</div>
-
-
-		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item rightbox"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item rightbox"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+				<div class="bw_item"></div>
+					<div class="bw_item rightbox"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item"></div>
 				<div class="bw_item rightbox"></div>
 			</div>
 		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
-			</div>
-		</article>
-
-		<article>
-			<div class="seller_pf_wrap">
-				<img src="/wishJam/img/seller.jpeg" class="seller_pf">
-				<h3>작가 이름</h3>
-			</div>
-
-			<div id="celllist_wrap">
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item"></div>
-				<div class="bw_item rightbox"></div>
-			</div>
-		</article>
-
-
-	</section>
-	
-	
-  <section id="author-works" class="hidden">
-        <h2 id="author-title"></h2>
-        <div id="works-list">
-            작가 작품
-        </div>
-    </section>
-	
-	
-
-
+	</Section>
 </body>
 </html>
