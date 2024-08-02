@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
+<link rel="stylesheet" href="css/allFonts.css" />
+<link rel="stylesheet" href="/wishJam/css/burger.css" />
+<link rel="stylesheet" href="/wishJam/css/index.css" />
+<link rel="stylesheet" href="/wishJam/css/allFonts.css" />
+<meta charset="UTF-8">
 <style>
 section {
 	font-family: 'Pretendard-Regular';
@@ -88,6 +92,7 @@ h2 {
 </style>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<section>
 		<h2>전체 상품</h2>
 		<article>
