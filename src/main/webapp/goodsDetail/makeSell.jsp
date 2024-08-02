@@ -39,28 +39,124 @@ ul {
 	padding: 0;
 	margin: 0;
 }
+
+.txtfunc {
+	display: flex;
+}
+
+.bordbox {
+	border: 1px solid gray;
+}
+
+.editbox {
+	border: 1px solid gray;
+	padding: 15px;
+}
+
+.txtimg {
+	width: 400px;
+	object-fit: cover;
+}
+
+.txtimg:hover{
+cursor: pointer;
+}
+
+#txt:focus {
+	outline: 0;
+}
+
+.editor {
+margin: 0 auto;
+	width: 600px;
+}
+
+#uploadImg	{
+	
+}
+
+.optbox:focus-within {
+	background-color: #ffdbea;
+}
 </style>
 <script>
-	function addsale() {
-		var salebtn = document.getElementById('addsale');
+	function addSale() {
+		var salebtn = document.makeSellfm.addsale;
+		var salebox = document.getElementById('salebox');
 		if (salebtn.checked) {
-			document.getElementById('salebox').innerHTML = '<jsp:include page="moreFunc.jsp"/>';
+			salebox.style.display = "block";
 		} else {
-			document.getElementById('salebox').innerHTML='';
+			salebox.style.display = "none";
+		}
+ 
+	}
+
+	function addterm(v) {
+		var duebox = document.getElementById("duebox");
+
+		if (v == "term") {
+			duebox.style.display = "block";
+		} else if (v == "every") {
+			duebox.style.display = "none";
+		}
+	}
+
+	function boldSelected() {
+		var selected = document.getSelection().toString();
+		var content = document.getElementById("txt");
+
+		if ((content.innerHTML).indexOf(selected)) {
+			console.log('aa');
 		}
 
+		var arr = (content.innerHTML).split(selected);
+		var ad = arr[0] + '<span><b>' + selected + '</b></span>' + arr[1];
+
+		content.innerHTML=ad;
+
+	}
+
+	function upImage(v) {
+		var file = document.getElementById("uploadImg").files[0];
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			var page = document.getElementById("page");
+			var content = document.getElementById("txt");
+
+			content.innerHTML += '<div><img class="txtimg" src="'+reader.result+'"></div>';
+		}
+
+		reader.readAsDataURL(file);
+	}
+	
+	function selectThem(){
+		var allSale = document.makeSellfm.allSale;
+		var saleGoods = document.makeSellfm.saleGoods;
+		
+		if(allSale.checked){
+			for(var i=0; i<saleGoods.length;i++){
+				saleGoods[i].checked="checked";
+			}
+		} else {
+			for(var i=0; i<saleGoods.length;i++){
+				saleGoods[i].checked=false;
+			}
+		}
 	}
 </script>
 </head>
 <body>
 	<section>
 		<h2>게시글 작성</h2>
+		
+		<form name = "makeSellfm">
 		<article>
 			<ul>
 				<li>섬네일 <img src="../img/img1.jpg" class="selectimg"></li>
-
-
-				<li><select>
+				<li>
+					카테고리
+				<select>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -68,25 +164,36 @@ ul {
 				<li>제목<input type="text">
 				<li>설명<input type="text">
 				<li>상세 설명
-					<div>
+					<div class="editor">
 						<div>
-							<input type="button" value="B">
+							<ul class="txtfunc">
+								<li><input type="button" value="B" onclick="boldSelected()"></li>
+								<li><input type="file" id="uploadImg" accept="image/*"
+									onChange="upImage(this.value)"></li>
+							</ul>
 						</div>
-						<textarea>텍스트에어리어</textarea>
+						<div class="editbox">
+							<div style="text-align: left; cursor: text;">
+								<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서, 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
+							</div>
+						</div>
 					</div>
 				</li>
-				<li class="fbox fcenter">기간
+				<li>
 					<div>
+						<input type="radio" name="termbtn" value="every"
+							onclick="addterm(this.value)" checked>상시 판매 <input
+							type="radio" name="termbtn" value="term"
+							onclick="addterm(this.value)">기간 판매
+					</div>
+					<div id="duebox" class="fbox fcenter" style="display: none;">
 						<select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
-						</select>
-					</div> ~
-					<div>
-						<select>
+						</select> ~ <select>
 							<option>1</option>
 						</select> <select>
 							<option>1</option>
@@ -110,7 +217,23 @@ ul {
 				</li>
 				<li><article style="border: 1px solid gray;">
 						옵션 등록
-						<div class="fbox">
+						<div class="fbox optbox">
+							<img src="../img/img1.jpg" class="selectimg">
+							<div>
+								<ul>
+									<li>이름 <input type="text"></li>
+									<li>가격 <input type="text">원
+									</li>
+									<li>
+										<ul class="fbox">
+											<li>판매 수량 <input type="text"></li>
+											<li>구매 제한 <input type="text"></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="fbox optbox">
 							<img src="../img/img1.jpg" class="selectimg">
 							<div>
 								<ul>
@@ -130,19 +253,49 @@ ul {
 				<li>
 					<div>추가 사항</div>
 					<ul>
-						<li><input type="checkbox" id="addsale" onclick="addsale()">할인
-							기능
-							<div id="salebox">aa</div></li>
+						<li><input type="checkbox" name="addsale" onclick="addSale()">할인 기능
+							<div id="salebox" style="display: none;" class="bordbox">
+								<input type="checkbox" name = "allSale" onclick="selectThem()">전체 선택
+								<ul>
+									<li><div class="bordbox">
+											<ul class="fbox fcenter">
+												<li><input type="checkbox" name="saleGoods"></li>
+												<li>이름</li>
+												<li>가격</li>
+											</ul>
+										</div></li>
+									<li><div class="bordbox">
+											<ul class="fbox fcenter">
+												<li><input type="checkbox" name="saleGoods"></li>
+												<li>이름</li>
+												<li>가격</li>
+											</ul>
+										</div></li>
+									<li>
+										<div>
+											할인률 <select>
+												<option>10%</option>
+												<option>20%</option>
+												<option>30%</option>
+												<option>40%</option>
+												<option>50%</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+							</div></li>
 					</ul>
 				</li>
 			</ul>
 		</article>
-		<article>
-			<ul class="fbox fcenter">
-				<li><input type="button" value="취소">
-				<li><input type="button" value="등록">
-			</ul>
+		<article style="position: fixed; bottom: 0;">
+			<table class="fbox fcenter">
+				<tr>
+					<td><input type="button" value="취소"></td>
+					<td><input type="button" value="등록"></td>
+			</table>
 		</article>
+		</form>
 	</section>
 </body>
 </html>
