@@ -120,7 +120,7 @@
             dynamicLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
-                    const content = this.getAttribute('data-content');
+                    const content = this.getAttribute('data-content');99
                     if (content) {
                         loadContent(content);
                     }
