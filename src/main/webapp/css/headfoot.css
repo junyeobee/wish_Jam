@@ -1,0 +1,32 @@
+@charset "UTF-8";
+header {
+	width: 1500px;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	border-bottom: 2px solid black;
+	margin: 0px auto;
+}
+#top_left {
+	
+}
+
+#top_center {
+	
+}
+
+#top_right {
+	
+}
+
+#top_Search {
+	
+}
+
+
+footer {
+	height: 150px;
+	text-align: center;
+	font-size: 10px;
+}
