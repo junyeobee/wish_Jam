@@ -40,14 +40,15 @@ ul {
 	margin: 0;
 }
 
+.txtfunc {
+	display: flex;
+}
+
 .bordbox {
 	border: 1px solid gray;
 }
 
 .editbox {
-	margin: 0 auto;
-	width: 600px;
-
 	border: 1px solid gray;
 	padding: 15px;
 }
@@ -64,17 +65,30 @@ cursor: pointer;
 #txt:focus {
 	outline: 0;
 }
+
+.editor {
+margin: 0 auto;
+	width: 600px;
+}
+
+#uploadImg	{
+	
+}
+
+.optbox:focus-within {
+	background-color: #ffdbea;
+}
 </style>
 <script>
-	function addsale() {
-		var salebtn = document.getElementById('addsale');
+	function addSale() {
+		var salebtn = document.makeSellfm.addsale;
 		var salebox = document.getElementById('salebox');
 		if (salebtn.checked) {
 			salebox.style.display = "block";
 		} else {
 			salebox.style.display = "none";
 		}
-
+ 
 	}
 
 	function addterm(v) {
@@ -96,11 +110,9 @@ cursor: pointer;
 		}
 
 		var arr = (content.innerHTML).split(selected);
-		var ad = arr[0] + '<span style="font-weight: bold;">' + selected
-				+ '</span>' + arr[1];
+		var ad = arr[0] + '<span><b>' + selected + '</b></span>' + arr[1];
 
-		//content.innerHTML=content.innerHTML;
-		console.log(selected + "/" + content.innerHTML);
+		content.innerHTML=ad;
 
 	}
 
@@ -117,17 +129,34 @@ cursor: pointer;
 
 		reader.readAsDataURL(file);
 	}
+	
+	function selectThem(){
+		var allSale = document.makeSellfm.allSale;
+		var saleGoods = document.makeSellfm.saleGoods;
+		
+		if(allSale.checked){
+			for(var i=0; i<saleGoods.length;i++){
+				saleGoods[i].checked="checked";
+			}
+		} else {
+			for(var i=0; i<saleGoods.length;i++){
+				saleGoods[i].checked=false;
+			}
+		}
+	}
 </script>
 </head>
 <body>
 	<section>
 		<h2>게시글 작성</h2>
+		
+		<form name = "makeSellfm">
 		<article>
 			<ul>
 				<li>섬네일 <img src="../img/img1.jpg" class="selectimg"></li>
-
-
-				<li><select>
+				<li>
+					카테고리
+				<select>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -135,9 +164,9 @@ cursor: pointer;
 				<li>제목<input type="text">
 				<li>설명<input type="text">
 				<li>상세 설명
-					<div>
+					<div class="editor">
 						<div>
-							<ul>
+							<ul class="txtfunc">
 								<li><input type="button" value="B" onclick="boldSelected()"></li>
 								<li><input type="file" id="uploadImg" accept="image/*"
 									onChange="upImage(this.value)"></li>
@@ -145,8 +174,7 @@ cursor: pointer;
 						</div>
 						<div class="editbox">
 							<div style="text-align: left; cursor: text;">
-								<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서,
-									아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
+								<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서, 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
 							</div>
 						</div>
 					</div>
@@ -189,7 +217,23 @@ cursor: pointer;
 				</li>
 				<li><article style="border: 1px solid gray;">
 						옵션 등록
-						<div class="fbox">
+						<div class="fbox optbox">
+							<img src="../img/img1.jpg" class="selectimg">
+							<div>
+								<ul>
+									<li>이름 <input type="text"></li>
+									<li>가격 <input type="text">원
+									</li>
+									<li>
+										<ul class="fbox">
+											<li>판매 수량 <input type="text"></li>
+											<li>구매 제한 <input type="text"></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="fbox optbox">
 							<img src="../img/img1.jpg" class="selectimg">
 							<div>
 								<ul>
@@ -209,21 +253,20 @@ cursor: pointer;
 				<li>
 					<div>추가 사항</div>
 					<ul>
-						<li><input type="checkbox" id="addsale" onclick="addsale()">할인
-							기능
+						<li><input type="checkbox" name="addsale" onclick="addSale()">할인 기능
 							<div id="salebox" style="display: none;" class="bordbox">
-								<input type="checkbox">전체 선택
+								<input type="checkbox" name = "allSale" onclick="selectThem()">전체 선택
 								<ul>
 									<li><div class="bordbox">
 											<ul class="fbox fcenter">
-												<li><input type="checkbox"></li>
+												<li><input type="checkbox" name="saleGoods"></li>
 												<li>이름</li>
 												<li>가격</li>
 											</ul>
 										</div></li>
 									<li><div class="bordbox">
 											<ul class="fbox fcenter">
-												<li><input type="checkbox"></li>
+												<li><input type="checkbox" name="saleGoods"></li>
 												<li>이름</li>
 												<li>가격</li>
 											</ul>
@@ -252,6 +295,7 @@ cursor: pointer;
 					<td><input type="button" value="등록"></td>
 			</table>
 		</article>
+		</form>
 	</section>
 </body>
 </html>

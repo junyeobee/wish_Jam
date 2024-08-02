@@ -90,20 +90,13 @@ ul {
 	background-color: pink;
 }
 
-.reportbtn {
-	position: sticky;
-	position: -webkit-sticky;
-	top: 90%;
-	left: 90%;
-	width: 350px;
-	text-align: right;;
-	float: right;
-	
+ .reportbtn {
+	text-align: right;
 }
 
 .rpbtn {
 	width: 50px;
-	height: 50px;
+	height: 25px;
 	border-radius: 50px;
 	background-color: red;
 }
@@ -167,10 +160,6 @@ ul {
 			</form>
 		</article>
 	</section>
-	
-	<article class="reportbtn">
-			<input type="button" value="신고" class="rpbtn" onclick="openReport()">
-		</article>
 
 	<section class="explain">
 		<article>
@@ -205,6 +194,9 @@ ul {
 				<div>메이커</div>
 				<input type="button" value="찜">
 			</div>
+		</article>
+		<article class="reportbtn">
+			<input type="button" value="신고" class="rpbtn" onclick="openReport()">
 		</article>
 		
 	</section>
