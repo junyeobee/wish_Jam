@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <title>Insert title here</title>
 <style>
 body {
@@ -83,6 +85,53 @@ ul {
 .optbox:focus-within {
 	background-color: #ffdbea;
 }
+
+<
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+
+.icons {
+	font-size: 30px;
+	color: gray;
+	float: left;
+}
+
+.icons:hover {
+	cursor: pointer;
+}
+
+.kwbox {
+	width: 300px;
+	padding: 3px;
+	border: 1px solid black;
+	text-align: left;
+}
+
+.kwbox:focus {
+	outline: 0;
+}
+
+.kwbtn {
+	padding: 2px;
+	font-size: 13px;
+	border-radius: 15px;
+	cursor: pointer;
+	border: 1px solid #D1D1D1;
+	align-items: center;
+}
+
+.kwicon {
+	height: 15px;
+	display: flex;
+	font-size: 15px;
+	border-radius: 10px;
+	align-items: center;
+}
+
+.kwicon:hover {
+	background-color: #D1D1D1;
+}
 </style>
 <script>
 	function addSale() {
@@ -113,25 +162,26 @@ ul {
 		console.log(s.focusNode.toString()+s.focusOffset); */
 		var content = document.getElementById("txt");
 		var arr = (content.innerHTML).split(selected);
-		if(v=='FS') {
-			var st = '<span style="font-size: 11px">'+selected+'</span>';
-		} else if(v=='B'){
+		if (v == 'FS') {
+			var st = '<span style="font-size: 11px">' + selected + '</span>';
+		} else if (v == 'B') {
 			var st = '<span><b>' + selected + '</b></span>';
-		} else if(v=='I'){
+		} else if (v == 'I') {
 			var st = '<span><i>' + selected + '</i></span>';
-		} else if(v=='UL'){
+		} else if (v == 'UL') {
 			var st = '<span><u>' + selected + '</u></span>';
-		} else if(v=='C'){
+		} else if (v == 'C') {
 			var st = '<span style="color: red;">' + selected + '</span>';
-		} else if(v=='BC'){
-			var st = '<span style="background-color: pink;">' + selected + '</span>';
+		} else if (v == 'BC') {
+			var st = '<span style="background-color: pink;">' + selected
+					+ '</span>';
 		}
 
 		var ad = arr[0] + st + arr[1];
 
-		content.innerHTML = ad;	
+		content.innerHTML = ad;
 	}
-	
+
 	/* function rangeat(){
 		var se = document.getSelection();
 		console.log(se.)
@@ -176,6 +226,24 @@ ul {
 			placediv.style.display = "none";
 		}
 	}
+
+	function addOpt() {
+		var optsbox = document.getElementById("optsbox");
+
+		optsbox.innerHTML += '<div class="fbox optbox" style="justify-content: space-between; border: 1px solid gray;"><div class="fbox"><img src="../img/img1.jpg" class="selectimg"><div><ul><li>이름 <input type="text"></li><li>가격 <input type="text">원</li><li><ul class="fbox"><li>판매 수량 <input type="text"></li><li>구매 제한 <input type="text"></li></ul></li></ul></div></div><span class="material-symbols-outlined icons" onclick="deleteOpt(this)">close</span></div>';
+	}
+
+	function deleteOpt(t) {
+		t.parentNode.remove();
+	}
+
+	function keySelect(v) {
+		var kword = document.getElementById("kw");
+
+		if ((kword.innerHTML).indexOf(v) == -1) {
+			kword.innerHTML += v;
+		}
+	}
 </script>
 </head>
 <body>
@@ -197,30 +265,29 @@ ul {
 						<div class="editor">
 							<div>
 								<ul class="txtfunc">
+									<li><input type="button" value="FS"
+										onclick="styleSelected(this.value)"></li>
+									<li><input type="button" value="B"
+										onclick="styleSelected(this.value)"></li>
+									<li><input type="button" value="I"
+										onclick="styleSelected(this.value)"></li>
+									<li><input type="button" value="UL"
+										onclick="styleSelected(this.value)"></li>
+									<li><input type="button" value="C"
+										onclick="styleSelected(this.value)"></li>
+									<li><input type="button" value="BC"
+										onclick="styleSelected(this.value)"></li>
 									<li>
-										<input type="button" value="FS" onclick="styleSelected(this.value)">
+										<!-- <input type="file" id="uploadImg" accept="image/*"
+										onChange="upImage(this.value)"> --> <input type="button"
+										value="이미지">
 									</li>
-									<li><input type="button" value="B" onclick="styleSelected(this.value)"></li>
-									<li>
-										<input type="button" value="I" onclick="styleSelected(this.value)">
-									</li>
-									<li>
-										<input type="button" value="UL" onclick="styleSelected(this.value)">
-									</li>
-									<li>
-										<input type="button" value="C" onclick="styleSelected(this.value)">
-									</li>
-									<li>
-										<input type="button" value="BC" onclick="styleSelected(this.value)">
-									</li>
-									<li><!-- <input type="file" id="uploadImg" accept="image/*"
-										onChange="upImage(this.value)"> -->
-										<input type="button" value="이미지"></li>
 								</ul>
 							</div>
 							<div class="editbox">
 								<div style="text-align: left; cursor: text;">
-									<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서, 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
+									<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서,
+										아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
 								</div>
 							</div>
 						</div>
@@ -249,52 +316,68 @@ ul {
 						</div>
 					</li>
 					<li>
-						<div>
-							해시태그<input type="text">
+						<div class="fbox fcenter">
+							해시태그
+							<div class="kwbox fbox" id="kw" contenteditable="true">
+								<div class="fbox kwbtn">
+									<span>#키워드</span>
+									<span class="material-symbols-outlined kwicon">close</span>
+								</div>
+							</div>
 						</div>
 						<div>
 							<ul class="fbox fcenter">
 								<li>추천</li>
-								<li><input type="button" value="#a"></li>
-								<li><input type="button" value="#b"></li>
-								<li><input type="button" value="#c"></li>
+								<li><input type="button" value="#a" onclick="keySelect(this.value)"></li>
+								<li><input type="button" value="#b" onclick="keySelect(this.value)"></li>
+								<li><input type="button" value="#c" onclick="keySelect(this.value)"></li>
 							</ul>
 						</div>
 					</li>
 					<li>
-						<article style="border: 1px solid gray;">
-							옵션 등록
-							<div class="fbox optbox">
-								<img src="../img/img1.jpg" class="selectimg">
-								<div>
-									<ul>
-										<li>이름 <input type="text"></li>
-										<li>가격 <input type="text">원
-										</li>
-										<li>
-											<ul class="fbox">
-												<li>판매 수량 <input type="text"></li>
-												<li>구매 제한 <input type="text"></li>
-											</ul>
-										</li>
-									</ul>
+						<article id="optsbox">
+							옵션 등록 <input type="button" value="옵션 추가" onclick="addOpt()">
+							<div class="fbox optbox"
+								style="justify-content: space-between; border: 1px solid gray;">
+								<div class="fbox">
+									<img src="../img/img1.jpg" class="selectimg">
+									<div>
+										<ul>
+											<li>이름 <input type="text"></li>
+											<li>가격 <input type="text">원
+											</li>
+											<li>
+												<ul class="fbox">
+													<li>판매 수량 <input type="text"></li>
+													<li>구매 제한 <input type="text"></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
 								</div>
+								<span class="material-symbols-outlined icons"
+									onclick="deleteOpt(this)">close</span>
 							</div>
-							<div class="fbox optbox">
-								<img src="../img/img1.jpg" class="selectimg">
-								<div>
-									<ul>
-										<li>이름 <input type="text"></li>
-										<li>가격 <input type="text">원
-										</li>
-										<li>
-											<ul class="fbox">
-												<li>판매 수량 <input type="text"></li>
-												<li>구매 제한 <input type="text"></li>
-											</ul>
-										</li>
-									</ul>
+							<div class="fbox optbox"
+								style="justify-content: space-between; border: 1px solid gray;">
+								<div class="fbox">
+									<img src="../img/img1.jpg" class="selectimg">
+									<div>
+										<ul>
+											<li>이름 <input type="text"></li>
+											<li>가격 <input type="text">원
+											</li>
+											<li>
+												<ul class="fbox">
+													<li>판매 수량 <input type="text"></li>
+													<li>구매 제한 <input type="text"></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
 								</div>
+								<span class="material-symbols-outlined icons"
+									onclick="deleteOpt(this)">close</span>
 							</div>
 						</article>
 					</li>
@@ -303,7 +386,41 @@ ul {
 							판매 방법 <input type="checkbox" name="delivery" value="1">배송
 							<input type="checkbox" name="place" value="2"
 								onclick="addPlace()">현장 거래
-							<div id="addplace" style="display: none;">거래 희망 장소 거래 가능 시간
+							<div id="addplace" style="display: none;">
+								<div>
+									거래 희망 장소
+									<div>
+										<select>
+											<option>가동</option>
+											<option>나동</option>
+											<option>다동</option>
+											<option>라동</option>
+										</select>
+									</div>
+								</div>
+								<div>
+									거래 가능 시간
+									<div>
+										<ul>
+											<li><select>
+													<option>1</option>
+											</select>일<select>
+													<option>오전</option>
+											</select><select>
+													<option>1</option>
+											</select>시부터
+										</ul>
+										<ul>
+											<li><select>
+													<option>1</option>
+											</select>일<select>
+													<option>오전</option>
+											</select><select>
+													<option>1</option>
+											</select>시까지
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
 					<li>
