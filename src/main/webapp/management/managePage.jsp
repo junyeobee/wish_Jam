@@ -79,7 +79,9 @@
             <a href="/wishJam/index.jsp">메인로고</a>
         </div>
         <div id="manageimg">
+        	<a href="#" data-content = "managerModify" class="dynamic-link">
             <img src="/wishJam/img/bonobono.jpg" class="pfimg" alt="img">
+            </a>
             <div id = "managerExplane">관리자 이름 님</div>
         </div>
         <div class="element">
