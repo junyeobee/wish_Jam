@@ -79,7 +79,9 @@
             <a href="/wishJam/index.jsp">메인로고</a>
         </div>
         <div id="manageimg">
+        	<a href="#" data-content = "managerModify" class="dynamic-link">
             <img src="/wishJam/img/bonobono.jpg" class="pfimg" alt="img">
+            </a>
             <div id = "managerExplane">관리자 이름 님</div>
         </div>
         <div class="element">
@@ -118,7 +120,7 @@
             dynamicLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
-                    const content = this.getAttribute('data-content');
+                    const content = this.getAttribute('data-content');99
                     if (content) {
                         loadContent(content);
                     }

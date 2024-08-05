@@ -90,20 +90,13 @@ ul {
 	background-color: pink;
 }
 
-.reportbtn {
-	position: sticky;
-	position: -webkit-sticky;
-	top: 90%;
-	left: 90%;
-	width: 350px;
-	text-align: right;;
-	float: right;
-	
+ .reportbtn {
+	text-align: right;
 }
 
 .rpbtn {
 	width: 50px;
-	height: 50px;
+	height: 25px;
 	border-radius: 50px;
 	background-color: red;
 }
@@ -167,10 +160,6 @@ ul {
 			</form>
 		</article>
 	</section>
-	
-	<article class="reportbtn">
-			<input type="button" value="신고" class="rpbtn" onclick="openReport()">
-		</article>
 
 	<section class="explain">
 		<article>
@@ -197,12 +186,6 @@ ul {
 				condimentum mollis tortor. Duis a cursus ipsum. Nam orci purus,
 				porttitor et lorem quis, lacinia auctor sem. Curabitur eu turpis in
 				orci faucibus scelerisque. Donec a leo felis.</div>
-			<div>Donec nisl sapien, tincidunt et dignissim et, porttitor
-				vitae sem. Sed eros nibh, accumsan suscipit elementum in, auctor a
-				arcu. Proin consectetur pharetra suscipit. Aliquam eu ante
-				dignissim, feugiat risus ut, cursus velit. Nam euismod dignissim
-				ligula in suscipit. Donec mattis metus sit amet tellus tempor
-				porttitor quis ut urna. Aenean bibendum congue dolor nec sagittis.</div>
 			<img src="../img/img1.jpg" class="conimg">
 		</article>
 		<article>
@@ -211,6 +194,9 @@ ul {
 				<div>메이커</div>
 				<input type="button" value="찜">
 			</div>
+		</article>
+		<article class="reportbtn">
+			<input type="button" value="신고" class="rpbtn" onclick="openReport()">
 		</article>
 		
 	</section>
