@@ -51,6 +51,7 @@
       font-family: 'Cafe24Ohsquareair';
     }
     
+    /* 버튼 스타일(흰색바탕 + 다홍색테두리) */
     .l_join{
       width: 360px;
       height: 55px;
