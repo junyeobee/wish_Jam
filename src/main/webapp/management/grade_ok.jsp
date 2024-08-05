@@ -2,6 +2,7 @@
 <jsp:useBean id = "edao" class = "com.manage.wishJam.ExampleDAO"/>
 <%
 	String a = request.getParameter("g_point");
+	System.out.println(a);
 	String msg = "실패";
 
 	if(a!=null) {

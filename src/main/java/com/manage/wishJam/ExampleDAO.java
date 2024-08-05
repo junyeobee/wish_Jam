@@ -21,8 +21,10 @@ public class ExampleDAO {
 			ArrayList<ExampleDTO> arr = new ArrayList<ExampleDTO>();
 			rs.next();
 			if(rs!=null) {
+				do {
 				ExampleDTO e = new ExampleDTO(rs.getString(1), rs.getInt(2));
 				arr.add(e);
+				}while(rs.next());
 			}else {
 				return null;
 			}
@@ -68,4 +70,5 @@ public class ExampleDAO {
 			}
 		}
 	}
+	
 }
