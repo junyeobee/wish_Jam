@@ -6,7 +6,6 @@ public class manageDAO {
 	private String homePath;
 	//4. 공통경로
 	private String url = "img/profile/";
-	private String crpath;
 	
 	public String getHomePath() {
 		return homePath;
@@ -16,12 +15,6 @@ public class manageDAO {
 	}
 	public String getUrl() {
 		return url;
-	}
-	public String getCrpath() {
-		return crpath;
-	}
-	public void setCrpath(String crpath) {
-		this.crpath = crpath;
 	}
 	public manageDAO() {
 	}
