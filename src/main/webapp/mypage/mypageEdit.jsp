@@ -1,5 +1,27 @@
+<%@page
+	import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.File"%>
+<%@ page import="javax.servlet.*"%>
+<jsp:useBean id="mdao" class="com.mypage.wishJam.MypageDAO"
+	scope="session" />
+
+<%
+//String id="seller";
+//String p="1234";
+//String pwd= request.getParameter("pwd");
+
+//if(pwd !=null){
+
+//if(pwd.equals(p)){
+%>
+<script>
+	function modifyImg() {
+		window.open('../management/ImgUpload.jsp', 'ImgUpload',
+				'width=400,height=400');
+	}
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +39,24 @@ section {
 	margin: 0 auto;
 	font-family: 'Pretendard-Regular';
 }
- 
+
+.profileimg {
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+
+.profileimg:hover { .edit { opacity:0.8;
+	transition: 0.3s;
+}
+
+}
 .profileimg img {
 	width: 80px;
 	height: 80px;
 	border-radius: 100px;
 	background-color: gray;
 	text-align: center;
-	position: absolute;
-	top: 0;
-	]
 }
 
 #article_edit {
@@ -34,7 +64,6 @@ section {
 	height: 130px;
 	display: flex;
 	flex-wrap: wrap;
-
 }
 
 #article_edit2 {
@@ -42,7 +71,6 @@ section {
 	height: 130px;
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 
 #article_edit3 {
@@ -50,7 +78,7 @@ section {
 	height: 150px;
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom:40px;
+	margin-bottom: 40px;
 }
 
 #article_edit4 {
@@ -94,14 +122,12 @@ section {
 .input_wrap {
 	width: 370px;
 	height: 70px;
-	
 	position: relative;
 }
 
 .input_wrap2 {
 	width: 370px;
 	height: 150px;
-
 	position: relative;
 }
 
@@ -120,11 +146,10 @@ section {
 	font-family: 'Cafe24Ssurround';
 }
 
-
-.addr input{
-width: 257px;
-height: 38px;
-margin-bottom:6px;
+.addr input {
+	width: 257px;
+	height: 38px;
+	margin-bottom: 6px;
 }
 
 #bt {
@@ -132,8 +157,21 @@ margin-bottom:6px;
 	height: 40px;
 }
 
-
-
+.edit {
+	width: 100%;
+	height: 30px;
+	z-index: 1;
+	background-color: black;
+	color: white;
+	font-size: 13px;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	border-radius: 0 0 100px 100px;
+	vertical-align: center;
+	opacity: 0;
+	padding-top: 5px;
+}
 </style>
 
 <script>
@@ -145,19 +183,38 @@ margin-bottom:6px;
 
 
 <body>
-<%@ include file="../header.jsp" %>
+	<%@ include file="../header.jsp"%>
 	<section>
 		<form name="mypageedit" action="mypageEdit_of.jsp">
 			<div class="title">
 				<h2>내 정보 수정하기</h2>
 			</div>
 			<article id="article_edit">
+				<%
+				String path = request.getRealPath("/");
+				mdao.setHomepath(path);
+				File file = new File(mdao.getHomepath() + mdao.getUrl());
+				File[] fileList = file.listFiles();
+				String imgSrc = "";
+				System.out.println(mdao.getHomepath());
+				for (File f : fileList) {
+					if (f.isFile()) {
+						imgSrc = "/wishJam/img/member_profile/";
+						break;
 
+					} else {
+						imgSrc = "/wishJam/img/member_profile/default.png";
+					}
+				}
 
+				System.out.println(imgSrc);
+				%>
 				<div class="edit_item label">프로필 사진</div>
-				<div class="profileimg edit_item">
-					<img src="/wishJam/img/profile.png">
+				<div class="profileimg ">
+					<span class="edit">변경하기</span> <img src="<%=imgSrc%>"
+						alt="mypageImg" onclick="modifyImg()">
 				</div>
+
 			</article>
 
 
@@ -203,8 +260,8 @@ margin-bottom:6px;
 					<div class="edit_item">
 						<div class="addr">
 							<input type="text" name="addr"> <input type="button"
-								name="postalcode" value="우편번호 검색" id="bt"> <input type="text" name="addr">
-							<input type="text" name="addr">
+								name="postalcode" value="우편번호 검색" id="bt"> <input
+								type="text" name="addr"> <input type="text" name="addr">
 						</div>
 					</div>
 
