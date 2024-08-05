@@ -5,7 +5,6 @@
 <%@ page import="java.io.File"%>
 <%@ page import="javax.servlet.*"%>
 <jsp:useBean id="mdao" class="com.mypage.wishJam.MypageDAO" scope="session" />
-
 <%
 //String id="seller";
 //String p="1234";

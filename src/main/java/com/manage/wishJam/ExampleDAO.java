@@ -44,4 +44,28 @@ public class ExampleDAO {
 		}
 		
 	}
+	public int gradeEdit(int num) {
+		try {
+			con = com.db.wishJam.DbConn.getConn();
+			String sql = "update grade set g_point = ? where g_name = '예시'";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			int num2 = ps.executeUpdate();
+			return num2;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (con != null)
+					con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
