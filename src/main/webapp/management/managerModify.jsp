@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="mdao" class="com.manage.wishJam.manageDAO" scope="session"/>
 <%
-    String id = "1234"; // 관리자 이름(테스트용)
+    String id = "bonobono"; // 관리자 이름(테스트용)
     String p = "1234";
     String pwd = request.getParameter("pwd");
     if (pwd != null) {
@@ -23,6 +23,7 @@
                     File file = new File(mdao.getHomePath() + mdao.getUrl());
                     File[] fileList = file.listFiles();
                     String imgSrc = "";
+                    System.out.println(mdao.getHomePath());
                     for (File f : fileList) {
                         if (f.isFile() && f.getName().startsWith(id)) {
                             imgSrc = "/wishJam/img/profile/"+f.getName();	//관리자이름이랑 같으면 경로지정하고 break

@@ -122,6 +122,13 @@
       text-decoration: line-through;
     }
     
+    /* 버튼 스타일(원없는거) */
+    .detail_del{
+      border: 1px solid #ff4900;
+      background: #ff4900;
+      color: #fff;
+    }
+    
     .cost_box{
       padding: 19px 18px 18px 20px;
       border: 1px solid #f2f2f2;
@@ -156,6 +163,7 @@
       vertical-align: bottom;
     }
     
+    /* 버튼 스타일(원있는거) */
     .cart_pay{
       width: 300px;
       height: 55px;
@@ -187,9 +195,11 @@
 </style>
 </head>
 <body>
+<!-- 품절상품 표시 -->
 <%@ include file="../header.jsp" %>
 <div class="cart_wrap">
 	<div class="cart_box">
+	<form class="cart_form" action="../pay/pay.jsp">
 		<h2>장 바 구 니</h2>
 		<div class="cart_in_box">
 			<div class="cart_detail">
@@ -198,72 +208,82 @@
 					<button>선택삭제</button>
 				</div>
 				<hr>
-				<div>
-				<div class="cart_detail">
-					<ul style="list-style-type: none;">
-						<li class="detail_box">
-							<input type="checkbox" class="detail_btn">
-							<a href="../goodsDetail/detail.jsp" class="detail_img"><img src="../img/profile.png" style="width: 100px;height: 100px;"></a>
-							<div class="detail_alt">
-								<a href="../goodsDetail/detail.jsp" class="detail_alt" style="text-decoration: none;">
-									<span class="detail_info">상품명</span>
-									<span class="detail_altinfo">부가상품설명</span>
-								</a>
-							</div>
-							<div class="detail_count">
-								<button class="count_css">-</button>
-								<div>1</div>
-								<button class="count_css">+</button>
-							</div>
-							<div class="detail_cost"> 
-								<span class="detail_info">2,000원</span>
-								<span class="detail_altcost">3,500원</span>
-							</div>
-							<button class="detail_del">x</button>
-						</li>
-					</ul>
-				</div>
+				<div class="cart_dbottom">
+					<div class="cart_detail">
+						<ul style="list-style-type: none;">
+							<!-- 이부분 반복 -->
+							<li class="detail_box">
+								<input type="checkbox" class="detail_btn">
+								<a href="../goodsDetail/detail.jsp" class="detail_img"><img src="../img/profile.png" style="width: 100px;height: 100px;"></a>
+								<div class="detail_alt">
+									<a href="../goodsDetail/detail.jsp" class="detail_alt" style="text-decoration: none;">
+										<span class="detail_info">상품명</span>
+										<!-- 부가상품설명 없으면 생성x -->
+										<span class="detail_altinfo">부가상품설명</span>
+									</a>
+									<input type="hidden" name="product" value="상품명">
+								</div>
+								<div class="detail_count">
+									<button class="count_css">-</button>
+									<div>1</div>
+									<input type="hidden" name="p_count" value="1">
+									<button class="count_css">+</button>
+								</div>
+								<div class="detail_cost"> 
+									<div class="detail_info">2,000원</div>
+									<input type="hidden" name="p_apay" value="2000">
+									<!-- 할인가격 없으면 생성x -->
+									<div class="detail_altcost">3,500원</div>
+									<input type="hidden" name="p_bpay" value="3500">
+								</div>
+								<button class="detail_del">x</button>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="cart_cost">
-				<div class="test">
-				<div class="cost_box">
-					<div class="cost_detail">
-				  		<span class="cost_name">상품금액</span>
-				  		<span class="cost_money">3,500
-				  			<span class="cost_alt">원</span>
-				  		</span>
-				  	</div>
-				  	<div class="cost_detail">
-				  		<span class="cost_name">상품할인금액</span>
-				  		<span class="cost_money">-1,500
-				  			<span class="cost_alt">원</span>
-				  		</span>
-				  	</div>
-				  	<div class="cost_detail">
-				  		<span class="cost_name">배송비</span>
-				  		<span class="cost_money">+3,000
-				  			<span class="cost_alt">원</span>
-				  		</span>
-				  	</div>
-				  	<hr>
-				  	<div class="cost_detail">
-				  		<span class="cost_name">결제예정금액</span>
-				  		<span class="cost_money">5,000
-				  			<span class="cost_alt">원</span>
-				  		</span>
-				  	</div>
-				</div>
-				<div style="margin-top:25px;">
-					<input type="submit" class="cart_pay" value="결제하기">
-					<ul class="cart_noti">
-						<li class="noti_detail">[주문완료]상태일 경우만 주문 취소가 가능합니다.</li>
-						<li class="noti_detail">[마이페이지 > 구매내역 상세페이지]에서 취소하실 수 있습니다.</li>
-					</ul>
-				</div>
+				<div class="cost_title">
+					<div class="cost_box">
+						<div class="cost_detail">
+					  		<span class="cost_name">상품금액</span>
+					  		<span class="cost_money">3,500
+					  			<span class="cost_alt">원</span>
+					  		</span>
+					  	</div>
+					  	<div class="cost_detail">
+					  		<span class="cost_name">상품할인금액</span>
+					  		<span class="cost_money">-1,500
+					  			<span class="cost_alt">원</span>
+					  		</span>
+					  	</div>
+					  	<div class="cost_detail">
+					  		<span class="cost_name">배송비</span>
+					  		<span class="cost_money">+3,000
+					  		<input type="hidden" name="p_ship" value="3000">
+					  			<span class="cost_alt">원</span>
+					  		</span>
+					  	</div>
+					  	<hr>
+					  	<div class="cost_detail">
+					  		<span class="cost_name">결제예정금액</span>
+					  		<span class="cost_money">5,000
+					  		<input type="hidden" name="p_fpay" value="5000">
+					  			<span class="cost_alt">원</span>
+					  		</span>
+					  	</div>
+					</div>
+					<div style="margin-top:25px;">
+						<input type="submit" class="cart_pay" value="결제하기">
+						<ul class="cart_noti">
+							<li class="noti_detail">[주문완료]상태일 경우만 주문 취소가 가능합니다.</li>
+							<li class="noti_detail">[마이페이지 > 구매내역 상세페이지]에서 취소하실 수 있습니다.</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
+	</form>	
 	</div>
 </div>	
 <%@ include file="../footer.jsp" %>
