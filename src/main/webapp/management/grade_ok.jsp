@@ -4,7 +4,7 @@
 	String a = request.getParameter("g_point");
 	System.out.println(a);
 	String msg = "실패";
-
+	
 	if(a!=null) {
 		int num = Integer.parseInt(a);
 		int result = edao.gradeEdit(num);

@@ -90,11 +90,11 @@
                             <tr>
                                 <td><img src="/wishJam/img/profile.png" alt="defaultimg" width="50px" height="50px" onclick="editIcon();"/></td>
                                 <td><input type="text" class="g_name" value="<%= dto.getG_name() %>" readonly="readonly"/></td>
-                                <td><input type="text" class="g_point" value="<%= dto.getG_point() %>" readonly="readonly"/></td>
+                                <td><input type="text" name = "g_point" class="g_point" value="<%= dto.getG_point() %>" readonly="readonly"/></td>
                             </tr>
                             <% 
                         }
-                    } else { 
+                    }else{ 
                         %>
                         <tr>
                             <td colspan="3"><label>등급을 설정해주세요</label></td>
