@@ -1,5 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
+<%@page import="java.io.*"%>
 <!DOCTYPE html>
+<jsp:useBean id = "mdao" class="com.manage.wishJam.manageDAO"/>
+<%
+	String id = "bonobono";
+	String pwd = "1234";
+	session.setAttribute("userId" , id);
+	session.setAttribute("userPwd" , pwd);
+	String path = request.getRealPath("/");
+	mdao.setHomePath(path);
+	File file = new File(mdao.getHomePath() + mdao.getUrl());
+	
+	File[] fileList = file.listFiles();
+	String imgSrc = "/wishJam/img/profile/default.jpg";
+	System.out.println(mdao.getHomePath());
+	for (File f : fileList) {
+		if (f.isFile() && f.getName().startsWith(id)) {
+			imgSrc = "/wishJam/img/profile/"+f.getName();	//관리자이름이랑 같으면 경로지정하고 break
+			break;
+		}else{
+			imgSrc = "/wishJam/img/profile/default.jpg"; //아니면 default이미지
+		}
+	}
+	System.out.println(imgSrc);
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -80,7 +105,7 @@
         </div>
         <div id="manageimg">
         	<a href="#" data-content = "managerModify" class="dynamic-link">
-            <img src="/wishJam/img/bonobono.jpg" class="pfimg" alt="img">
+            <img src="<%=imgSrc %>" class="pfimg" alt="img">
             </a>
             <div id = "managerExplane">관리자 이름 님</div>
         </div>
@@ -120,7 +145,7 @@
             dynamicLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
-                    const content = this.getAttribute('data-content');99
+                    const content = this.getAttribute('data-content');
                     if (content) {
                         loadContent(content);
                     }

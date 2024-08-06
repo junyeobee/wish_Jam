@@ -1,5 +1,14 @@
+<%@page import="com.allgoods.wishJam.AllgoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="com.allgoods.wishJam.AllgoodsDTO"%>
+<jsp:useBean id="gdao" class="com.allgoods.wishJam.AllgoodsDAO"></jsp:useBean>
+
+<%
+List<AllgoodsDTO> productList = gdao.allGoods();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +22,7 @@
 <style>
 section {
 	font-family: 'Pretendard-Regular';
-	width: 940px;
+	width: 960px;
 	height: 2000px;
 	border: 1px solid black;
 	margin: 0 auto;
@@ -25,24 +34,23 @@ section {
 
 .container {
 	width: 100%;
-	height: 700px;
 	display: flex;
-	margin-top: 100px;
 	flex-wrap: wrap;
+	border: 2px solid red;
+padding-top: 30px;
+		gap:1.2rem !important;
+	row-gap: 1.2rem !important;
+
 }
 
 .item {
 	width: 223px;
 	height: 380px;
-	margin-right: 13px;
-	margin-bottom: 30px;
+	
+	
 	border: 1px solid blue;
 	position: relative;
 	border-radius: 20px;
-}
-
-.rightbox {
-	margin-right: 0;
 }
 
 .inner {
@@ -75,10 +83,7 @@ section {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-}
-
-h2 {
-	font-family: 'Cafe24Ssurround';
+	display: block;
 }
 
 .discount {
@@ -90,9 +95,27 @@ h2 {
 	color: #747474;
 }
 </style>
+
+<script>
+//찜하기 버튼
+function jjim(productId){
+
+	var jjimbt=document.getElementById("jjimimg_"+productId);
+	var on = "heart.png";
+	var off = "heart_gray.png";
+	
+
+if(jjimbt.src.endsWith(off)){
+jjimbt.src="/wishJam/img/"+on;
+}else{
+	jjimbt.src="/wishJam/img/"+off;
+}
+
+}
+</script>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+	<%@ include file="../header.jsp"%>
 	<section>
 		<h2>전체 상품</h2>
 		<article>
@@ -103,72 +126,30 @@ h2 {
 				</select>
 			</div>
 		</article>
-
-
-
-
-		<div class="wrapper">
-			<div class="container">
-
-				<div class="item ">
-					<div class="img">
-						<img src="/wishJam/img/img2.jpeg" alt="a">
-					</div>
-					<div class="inner">
-						<div class="nickname">봉구봉구</div>
-						<div>캐릭터 인형</div>
-						<div>
-							<span class="discount">10%</span>15,000
-						</div>
-						<span class="heart"><img src="/wishJam/img/heart.png"></span>
-					</div>
+		<div class="container">
+			<%
+			for (AllgoodsDTO products : productList) {
+			%>
+			<div class="item ">
+				<div class="img"
+					onclick="location.href='/wishJam/goodsDetail/detail.jsp'">
+					<img src="<%=products.getThumbnail_url()%>" alt="썸네일">
+				</div>
+				<div class="inner">
+					<div class="writer"><%=products.getSeller()%></div>
+					<div><%=products.getName()%></div>
+					<div><%=products.getPrice()%></div>
+					<span class="heart" onclick="jjim(<%=products.getIdx()%>);"><img
+						src="/wishJam/img/heart_gray.png"
+						id="jjimimg_<%=products.getIdx()%>"></span>
 				</div>
 
-				<div class="item ">
-					<div class="img">
-						<img src="/wishJam/img/img1.jpg">
-					</div>
-					<div class="inner">
-						<div class="writer">작가</div>
-						<div>제목</div>
-						<div>가격</div>
-						<span class="heart"><img src="/wishJam/img/heart_gray.png"></span>
-					</div>
-				</div>
-
-				<div class="item ">
-					<div class="inner">
-						<div>작가</div>
-						<div>제목</div>
-						<div>가격</div>
-					</div>
-				</div>
-
-				<div class="item rightbox">
-					<div class="inner">
-						<div>작가</div>
-						<div>제목</div>
-						<div>가격</div>
-						<span class="heart"><img src="/wishJam/img/heart_gray.png"></span>
-					</div>
-				</div>
-
-				<div class="item">
-					<div class="inner">
-						<div>작가</div>
-						<div>제목</div>
-						<div>가격</div>
-					</div>
-				</div>
-				<div class="item item6 "></div>
-				<div class="item item7"></div>
-				<div class="item item8  rightbox"></div>
-				<div class="item item8 "></div>
 			</div>
 
-
+			<%
+			}
+			%>
 		</div>
-
 	</section>
 </body>
 </html>

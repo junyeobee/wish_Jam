@@ -5,10 +5,7 @@
 <%@ page import="java.io.File"%>
 <%@ page import="javax.servlet.*"%>
 <jsp:useBean id="mdao" class="com.mypage.wishJam.MypageDAO" scope="session" />
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 <%
 //String id="seller";
 //String p="1234";
@@ -17,6 +14,10 @@
 //if(pwd !=null){
 
 //if(pwd.equals(p)){
+	
+	session = request.getSession(true);
+	Object principal =
+	
 %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
