@@ -88,7 +88,7 @@ ul {
 
 <
 .material-symbols-outlined {
-	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 .icons {
@@ -106,10 +106,7 @@ ul {
 	padding: 3px;
 	border: 1px solid black;
 	text-align: left;
-}
-
-.kwbox:focus {
-	outline: 0;
+	height: 24px;
 }
 
 .kwbtn {
@@ -119,6 +116,7 @@ ul {
 	cursor: pointer;
 	border: 1px solid #D1D1D1;
 	align-items: center;
+	caret-color: transparent;
 }
 
 .kwicon {
@@ -131,6 +129,10 @@ ul {
 
 .kwicon:hover {
 	background-color: #D1D1D1;
+}
+
+.kweditbox:focus {
+	outline: 0;
 }
 </style>
 <script>
@@ -241,8 +243,45 @@ ul {
 		var kword = document.getElementById("kw");
 
 		if ((kword.innerHTML).indexOf(v) == -1) {
-			kword.innerHTML += v;
+			kword.innerHTML += '<div class="fbox kwbtn"><span class="kword">'
+					+ v
+					+ '</span> <span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
 		}
+	}
+
+	function clickBox() {
+		var kwedit = document.getElementById("kweditbox");
+
+		kwedit.focus();
+		kwedit.contentEditable='true';
+	}
+
+	function EnterforInput(e) {
+		var kwedit = document.getElementById("kweditbox");
+		var kword = document.getElementById("kw");
+
+		if (e.keyCode == 13) {
+			if (kwedit.innerText != '') {
+				kword.innerHTML += '<div class="fbox kwbtn"><span class="kword">#'
+						+ kwedit.innerText
+						+ '</span><span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
+				kwedit.innerHTML = '';
+				kwedit.blur();
+			} else {
+				kwedit.contentEditable='false';
+			}
+		}
+	}
+
+	function EnterforBr(e) {
+		var kwedit = document.getElementById("kweditbox");
+		if (e.keyCode == 13) {
+			kwedit.focus();
+		}
+	}
+
+	function deletekw(t) {
+		t.parentNode.remove();
 	}
 </script>
 </head>
@@ -318,19 +357,32 @@ ul {
 					<li>
 						<div class="fbox fcenter">
 							해시태그
-							<div class="kwbox fbox" id="kw" contenteditable="true">
-								<div class="fbox kwbtn">
-									<span>#키워드</span>
-									<span class="material-symbols-outlined kwicon">close</span>
+							<div class="kwbox fbox" onclick="clickBox()">
+								<div class="fbox" id="kw">
+									<div class="fbox kwbtn">
+										<span class="kword">#키워드</span> <span
+											class="material-symbols-outlined kwicon"
+											onclick="deletekw(this)">close</span>
+									</div>
+									<div class="fbox kwbtn">
+										<span class="kword">#팬시</span> <span
+											class="material-symbols-outlined kwicon"
+											onclick="deletekw(this)">close</span>
+									</div>
 								</div>
+								<div class="kweditbox" id="kweditbox" contenteditable="true"
+									onkeypress="EnterforInput(event)"></div>
 							</div>
 						</div>
 						<div>
 							<ul class="fbox fcenter">
 								<li>추천</li>
-								<li><input type="button" value="#a" onclick="keySelect(this.value)"></li>
-								<li><input type="button" value="#b" onclick="keySelect(this.value)"></li>
-								<li><input type="button" value="#c" onclick="keySelect(this.value)"></li>
+								<li><input type="button" value="#a"
+									onclick="keySelect(this.value)"></li>
+								<li><input type="button" value="#b"
+									onclick="keySelect(this.value)"></li>
+								<li><input type="button" value="#c"
+									onclick="keySelect(this.value)"></li>
 							</ul>
 						</div>
 					</li>
