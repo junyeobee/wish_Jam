@@ -1,21 +1,32 @@
+<%@page import="javax.websocket.Session"%>
 <%@page import="java.io.File"%>
 <%@page import="javax.servlet.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="mdao" class="com.manage.wishJam.manageDAO" scope="session"/>
+<head>
+<style>
+	#imgbox{
+		width:100px;
+		height:100px;
+	}
+</style>
+</head>
 <%
     String id = "bonobono"; // 관리자 이름(테스트용)
     String p = "1234";
     String pwd = request.getParameter("pwd");
     if (pwd != null) {
         if (pwd.equals(p)) {
+        	session.setAttribute("userId", id);
+            
             %>
             <script>
                 function modifyImg(){
                     window.open('ImgUpload.jsp','ImgUpload','width=400,height=300');
                 }
             </script>
-            <div>
+            <div>            	
                 <h1>관리자 수정</h1>
                 <%
                     String path = request.getRealPath("/");
@@ -36,7 +47,7 @@
                 %>
                 <div>
                     <label>프로필 사진 변경</label>
-                    <div>
+                    <div id = "imgbox">
                         <img src="<%= imgSrc %>" alt="managerImg" onclick="modifyImg();"/>
                     </div>
                 </div>
