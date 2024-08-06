@@ -22,7 +22,7 @@ public class ExampleDAO {
 			rs.next();
 			if(rs!=null) {
 				do {
-				ExampleDTO e = new ExampleDTO(rs.getString(1), rs.getInt(2));
+				ExampleDTO e = new ExampleDTO(rs.getInt(1), rs.getString(2), rs.getInt(3));
 				arr.add(e);
 				}while(rs.next());
 			}else {
@@ -69,6 +69,36 @@ public class ExampleDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	public int updateGrade(ArrayList<ExampleDTO> grades) {
+	    int result = 0;
+	    try {
+	        con = com.db.wishJam.DbConn.getConn();
+	        String sql = "UPDATE grade SET g_point = ? WHERE g_name = ?";
+	        ps = con.prepareStatement(sql);
+	        for (ExampleDTO dto : grades) {
+	            ps.setInt(1, dto.getG_point());
+	            ps.setString(2, dto.getG_name());
+	            ps.addBatch();
+	        }
+	        int[] results = ps.executeBatch();
+	        result = Arrays.stream(results).sum();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        result = 1;
+	    } finally {
+	        try {
+	            if (ps != null) 
+	            	ps.close();
+	            if (con != null) 
+	            	con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return result;
 	}
 	
 }
