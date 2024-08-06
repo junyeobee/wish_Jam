@@ -13,12 +13,11 @@
 </style>
 </head>
 <%
-    String id = "bonobono"; // 관리자 이름(테스트용)
-    String p = "1234";
+    String id = (String)session.getAttribute("userId");
+    String p = (String)session.getAttribute("userPwd");
     String pwd = request.getParameter("pwd");
     if (pwd != null) {
         if (pwd.equals(p)) {
-        	session.setAttribute("userId", id);
             
             %>
             <script>
@@ -27,7 +26,7 @@
                 }
             </script>
             <div>            	
-                <h1>관리자 수정</h1>
+                <h1>관리자 정보수정</h1>
                 <%
                     String path = request.getRealPath("/");
                     mdao.setHomePath(path);
