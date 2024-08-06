@@ -16,4 +16,8 @@ public class YunnaDB {
 		}
 	}
 
+	public static Connection getConn() throws Exception{
+		
+		return ds.getConnection();
+	}
 } // end

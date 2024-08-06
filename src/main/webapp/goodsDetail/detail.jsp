@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Detail page</title>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
 <style>
 body {
@@ -56,6 +59,7 @@ section {
 
 .listable {
 	border: 1px solid pink;
+	justify-content: space-between;
 }
 
 ul {
@@ -90,7 +94,7 @@ ul {
 	background-color: pink;
 }
 
- .reportbtn {
+.reportbtn {
 	text-align: right;
 }
 
@@ -102,13 +106,47 @@ ul {
 }
 </style>
 <script>
-	function addPrice() {
-		var totals = document.getElementById('totalprice');
-		totals.innerHTML = '<div>dd</div>';
+	function openReport() {
+		window.open('/wishJam/goodsDetail/report.jsp', 'report',
+				'width=400, height=500');
 	}
-	
-	function openReport(){
-		window.open('/wishJam/goodsDetail/report.jsp','report','width=400, height=500');
+
+	function deleteGd(t) {
+		t.parentNode.remove(t);
+	}
+
+	function plusBtn(t) {
+		var amount = document.getElementsByName(t.name);
+		amount[1].value = parseInt(amount[1].value, 10)+1;
+
+		var totals = document.getElementById('totalprice');
+		var price = parseInt(document.getElementById(t.name).innerText);
+		totals.innerHTML= parseInt(document.getElementById('totalprice').innerText)+price+'원';
+		
+		var lname = document.getElementById(t.name+'_gname');
+		var lamount = document.getElementById(t.name+'_amount');
+		var lprice = document.getElementById(t.name+'_price');
+		var gname= document.getElementById(t.name+'_name');
+
+		if(lname==null){
+			document.getElementById("option_table").innerHTML+='<div class="listable fbox"><table><tr><td id="'+t.name+'_gname">'+gname.innerText+'</td><td id="'+t.name+'_amount">'+amount[1].value+'개</td><td id="'+t.name+'_price">4000원</td></tr></table><span class="material-symbols-outlined kwicon" onclick="deleteGd(this)">close</span></div>';
+		}
+		else if(gname.innerText == lname.innerText){
+			lamount.innerHTML = amount[1].value+'개';
+			lprice.innerHTML=price+'원';
+		}
+	}
+
+	function minusBtn(t) {
+		var amount = document.getElementsByName(t.name);
+		if (parseInt(amount[1].value, 10) > 0) {
+			amount[1].value = parseInt(amount[1].value, 10) - 1;
+
+			var totals = document.getElementById('totalprice');
+			var price = parseInt(document.getElementById(t.name).innerText);
+			totals.innerHTML = parseInt(document.getElementById('totalprice').innerText)
+					- price + '원';
+		}
 	}
 </script>
 <body>
@@ -117,42 +155,30 @@ ul {
 			<form name="option">
 				<div>
 					<img class="boximg lfloat" src="../img/img2.jpeg">
-					<div>상품 설명글</div>
-					<div class="detail_price">얼마얼마원</div>
-					<input type="button" value="-"> <input type="text"
-						name="price1" value="0"> <input type="button" value="+"
-						onclick="addPrice()">
+					<div id="sg_idx1_name">당근 스티커</div>
+					<div class="detail_price" id="sg_idx1">4000</div>
+					원 <input type="button" value="-" name="sg_idx1"
+						onclick="minusBtn(this)"> <input type="text"
+						name="sg_idx1" value="0"> <input type="button" value="+"
+						name="sg_idx1" onclick="plusBtn(this)">
 				</div>
 				<div class="fclear">
 					<img class="boximg lfloat" src="../img/img2.jpeg">
-					<div>상품 설명글</div>
-					<div class="detail_price">얼마얼마원</div>
-					<input type="button" value="-"> <input type="text"
-						value="0"> <input type="button" value="+">
+					<div id="sg_idx2_name">당근 떡메모지</div>
+					<div class="detail_price" id="sg_idx2">2000</div>
+					원 <input type="button" value="-" name="sg_idx2"
+						onclick="minusBtn(this)"> <input type="text" name="sg_idx2"
+						value="0"> <input type="button" value="+" name="sg_idx2"
+						onclick="plusBtn(this)">
 				</div>
 			</form>
 		</article>
 		<article class="fclear">
 			<form name="option_table">
-
-				<table class="listable">
-					<tr>
-						<td>당근 스티커</td>
-						<td>2개</td>
-						<td>4000원</td>
-						<td><input type="button" value="X"></td>
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<td>당근 스티커</td>
-						<td>2개</td>
-						<td>4000원</td>
-						<td><input type="button" value="X"></td>
-					</tr>
-				</table>
+				<div id="option_table">
+				</div>
 				<div>총 상품 금액</div>
-				<div id="totalprice">8000원</div>
+				<div id="totalprice">0원</div>
 				<ul class="fbox">
 					<li class="btnli"><a href="#">장바구니</a></li>
 					<li class="btnli"><a href="#">구매하기</a></li>
@@ -198,7 +224,7 @@ ul {
 		<article class="reportbtn">
 			<input type="button" value="신고" class="rpbtn" onclick="openReport()">
 		</article>
-		
+
 	</section>
 	<%@ include file="review.jsp"%>
 </body>
