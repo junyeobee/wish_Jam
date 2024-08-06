@@ -9,9 +9,20 @@ private String thumbnail_url;
 
 
 
-public AllgoodsDTO(int idx2, String name2, int price2, String seller2, String thumbnail_url2) {
-	// TODO Auto-generated constructor stub
+ //Construct using Fields
+public AllgoodsDTO(int idx, String name, int price, String seller, String thumbnail_url) {
+	
+	this.idx = idx;
+	this.name = name;
+	this.price = price;
+	this.seller = seller;
+	this.thumbnail_url = thumbnail_url;
 }
+
+
+
+
+
 public int getIdx() {
 	return idx;
 }

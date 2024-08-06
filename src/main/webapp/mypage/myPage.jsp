@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
+<link rel="stylesheet" href="/wishJam/css/burger.css" />
+<link rel="stylesheet" href="/wishJam/css/index.css" />
+<link rel="stylesheet" href="/wishJam/css/allFonts.css" />
+
+
 <style>
 section {
 	width: 940px;
@@ -68,15 +72,8 @@ section {
 	margin-right: 0;
 }
 
-h2 {
-	color: black;
-	font-family: 'Cafe24Ssurround';
-}
 
-h3 {
-	color: black;
-	font-family: 'Cafe24Ssurround';
-}
+
 
 .nickname {
 	font-weight: 600;
@@ -91,7 +88,7 @@ h3 {
 </style>
 </head>
 <body>
-
+<%@ include file="../header.jsp"%>
 
 	<section>
 		<h2>마이페이지</h2>
