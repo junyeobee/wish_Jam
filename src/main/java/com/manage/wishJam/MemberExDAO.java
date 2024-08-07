@@ -67,14 +67,14 @@ public class MemberExDAO {
 		}
 	}
 	
-	public ArrayList<MemberExDTO> g(int cp, int ls) {
+	public ArrayList<MemberExDTO> allMember(int cp, int ls) {
 		try {
 			con = com.db.wishJam.DbConn.getConn();
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
 			String sql = "select * from "
 					+ "(select rownum as rnm,a.* from  "
-					+ "(select * from jsp_bbs order by ref desc,sunbun asc) a)b "
+					+ "(select * from member order by m_idx asc) a)b "
 					+ "where rnm >=? and rnm <= ?";
 			
 			ps = con.prepareStatement(sql);

@@ -25,19 +25,19 @@ public class MemberAddQuery {
             stmt = conn.createStatement();
 
             // 테이블 생성
-            String createTableSQL = "CREATE TABLE member ("
-                    + "m_idx NUMBER(4) PRIMARY KEY, "
-                    + "m_nick VARCHAR2(50), "
-                    + "g_name VARCHAR2(50), "
-                    + "m_id VARCHAR2(50), "
-                    + "m_pwd VARCHAR2(50), "
-                    + "m_name VARCHAR2(50), "
-                    + "m_tel VARCHAR2(20), "
-                    + "m_addr VARCHAR2(50), "
-                    + "m_email VARCHAR2(50), "
-                    + "m_point NUMBER(6))";
-            stmt.executeUpdate(createTableSQL);
-            System.out.println("Table created successfully!");
+//            String createTableSQL = "CREATE TABLE member ("
+//                    + "m_idx NUMBER(4) PRIMARY KEY, "
+//                    + "m_nick VARCHAR2(50), "
+//                    + "g_name VARCHAR2(50), "
+//                    + "m_id VARCHAR2(50), "
+//                    + "m_pwd VARCHAR2(50), "
+//                    + "m_name VARCHAR2(50), "
+//                    + "m_tel VARCHAR2(20), "
+//                    + "m_addr VARCHAR2(50), "
+//                    + "m_email VARCHAR2(50), "
+//                    + "m_point NUMBER(6))";
+//            stmt.executeUpdate(createTableSQL);
+//            System.out.println("Table created successfully!");
 
             // 더미 데이터 삽입
             String[] insertStatements = {

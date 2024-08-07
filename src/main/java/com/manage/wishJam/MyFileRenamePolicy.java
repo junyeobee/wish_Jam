@@ -24,7 +24,8 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
         }  
 
         // 사용자 ID를 파일 이름으로 사용
-        String newName = userId + ext;  
+        System.out.println(ext);
+        String newName = userId + ".jpg";  
         File newFile = new File(f.getParent(), newName);  
 
         // 파일이 이미 존재하면 덮어쓰기

@@ -15,7 +15,6 @@
 
 <%
 	MemberExDAO mexdao = new MemberExDAO();
-	ArrayList<MemberExDTO> arr = mexdao.allMem();
 	int e = mexdao.getTotalcnt();
 	String cp_s = request.getParameter("cp");
 	if(cp_s==null||cp_s.equals("")){
@@ -63,6 +62,7 @@
 		<tbody>
 			<%
 				System.out.println(e);
+				ArrayList<MemberExDTO> arr = mexdao.allMember(cp,listsize);
 				if(arr!=null){
 					for(MemberExDTO dto : arr){
 					%>
@@ -90,4 +90,26 @@
 			%>
 		</tbody>
 	</table>
+		<%
+	if(usrgroup != 0) {
+		%><a href="memberManage.jsp?cp=<%=(usrgroup-1)*pagesize+pagesize %>">&lt;&lt;</a><%
+	}
+%>
+
+<%
+	for(int i = usrgroup*pagesize+1; i<=usrgroup*pagesize+pagesize; i++){
+		%>
+		&nbsp;&nbsp;<a href="memberManage.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+		<%
+		if(i==totalpage){
+			break;
+		}
+	}
+%>
+<%
+	if(usrgroup != (totalpage/pagesize-(totalpage%pagesize==0?1:0))) {
+		%><a href="memberManage.jsp?cp=<%=(usrgroup+1)*pagesize+1%>">&gt;&gt;</a><%
+	}
+
+%>
 </div>
