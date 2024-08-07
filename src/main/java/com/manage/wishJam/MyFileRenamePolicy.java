@@ -11,10 +11,10 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
         this.userId = userId;
     }
 
-    public File rename(File f) {  
+    public File rename(File f) {
         // 파일 이름을 사용자 ID로 설정
-        String name = f.getName();  
-        String ext = null;  
+        String name = f.getName();
+        String ext = null;
 
         int dot = name.lastIndexOf(".");  
         if (dot != -1) {  
@@ -24,8 +24,9 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
         }  
 
         // 사용자 ID를 파일 이름으로 사용
-        String newName = userId + ext;  
-        File newFile = new File(f.getParent(), newName);  
+        System.out.println(ext);
+        String newName = userId + ".jpg";
+        File newFile = new File(f.getParent(), newName);
 
         // 파일이 이미 존재하면 덮어쓰기
         if (newFile.exists()) {
@@ -33,5 +34,5 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
         }
 
         return new File(f.getParent(), newName);
-    }  
+    }
 }

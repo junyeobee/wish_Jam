@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,15 +154,32 @@ ul {
 		if (v == "term") {
 			duebox.style.display = "block";
 		} else if (v == "every") {
+
 			duebox.style.display = "none";
 		}
+	}
+
+	function setTerm() {
+		var start = document.makeSellfm.s_start;
+		var end = document.makeSellfm.s_end;
+		nowdate = new Date();
+		var y = nowdate.getFullYear();
+		var m = nowdate.getMonth() + 1;
+		var d = nowdate.getDate();
+		if (m < 10) {
+			var ms = '0' + m;
+		}
+		if (d < 10) {
+			var ds = '0' + d;
+		}
+		start.value = y + "-" + ms + "-" + ds;
+		end.value = (y + 99) + "-" + ms + "-" + ds;
 	}
 
 	function styleSelected(v) {
 		var selected = document.getSelection().toString();
 		var s = document.getSelection();
-		/* console.log(s.selectNodeContents('<span>'));
-		console.log(s.focusNode.toString()+s.focusOffset); */
+
 		var content = document.getElementById("txt");
 		var arr = (content.innerHTML).split(selected);
 		if (v == 'FS') {
@@ -183,11 +201,6 @@ ul {
 
 		content.innerHTML = ad;
 	}
-
-	/* function rangeat(){
-		var se = document.getSelection();
-		console.log(se.)
-	} */
 
 	function upImage(v) {
 		var file = document.getElementById("uploadImg").files[0];
@@ -219,7 +232,7 @@ ul {
 	}
 
 	function addPlace() {
-		var placeCk = document.makeSellfm.place;
+		var placeCk = document.getElementById("place");
 		var placediv = document.getElementById("addplace");
 
 		if (placeCk.checked) {
@@ -227,6 +240,14 @@ ul {
 		} else {
 			placediv.style.display = "none";
 		}
+		
+		var fm = document.makeSellfm;
+		
+		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value+","
+		+ fm.apT.options[fm.apT.selectedIndex].value+","
+		+ fm.whenT.options[fm.whenT.selectedIndex].value+","
+		+ fm.apT2.options[fm.apT2.selectedIndex].value+","
+		+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
 	}
 
 	function addOpt() {
@@ -247,13 +268,16 @@ ul {
 					+ v
 					+ '</span> <span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
 		}
+
+		var kwords = document.makeSellfm.s_hash;
+		kwords.value += v;
 	}
 
 	function clickBox() {
 		var kwedit = document.getElementById("kweditbox");
 
 		kwedit.focus();
-		kwedit.contentEditable='true';
+		kwedit.contentEditable = 'true';
 	}
 
 	function EnterforInput(e) {
@@ -265,10 +289,14 @@ ul {
 				kword.innerHTML += '<div class="fbox kwbtn"><span class="kword">#'
 						+ kwedit.innerText
 						+ '</span><span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
+
+				var kwords = document.makeSellfm.s_hash;
+				kwords.value += '#' + kwedit.innerText;
+
 				kwedit.innerHTML = '';
 				kwedit.blur();
 			} else {
-				kwedit.contentEditable='false';
+				kwedit.contentEditable = 'false';
 			}
 		}
 	}
@@ -283,6 +311,175 @@ ul {
 	function deletekw(t) {
 		t.parentNode.remove();
 	}
+
+	function selectM(t) {
+		var m = parseInt(t.options[t.selectedIndex].value);
+
+		var lastday = 0;
+		switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			lastday = 31;
+			break;
+		case 2:
+			lastday = 29;
+			break;
+		default:
+			lastday = 30;
+			break;
+		}
+
+		var dayselect = document.getElementById("dayselect");
+		dayselect.innerHTML = '';
+
+		for (var i = 1; i <= lastday; i++) {
+			if(i<10){
+				var j='0'+i;
+			}
+			dayselect.innerHTML += '<option value='+j+'>' + i + '</option>';
+		}
+
+		var fm = document.makeSellfm;
+		var start = document.makeSellfm.s_start;
+		var end = document.makeSellfm.s_end;
+
+		start.value = fm.s_year.options[fm.s_year.selectedIndex].value + "-"
+				+ fm.s_month.options[fm.s_month.selectedIndex].value + "-"
+				+ fm.s_date.options[fm.s_date.selectedIndex].value;
+		end.value = fm.e_year.options[fm.e_year.selectedIndex].value + "-"
+				+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
+				+ fm.e_date.options[fm.e_date.selectedIndex].value;
+	}
+
+	function selectMM(t) {
+		var m = parseInt(t.options[t.selectedIndex].value);
+
+		var lastday = 0;
+		switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			lastday = 31;
+			break;
+		case 2:
+			lastday = 29;
+			break;
+		default:
+			lastday = 30;
+			break;
+		}
+
+		var dayselect = document.getElementById("dayselectM");
+		dayselect.innerHTML = '';
+
+		for (var i = 1; i <= lastday; i++) {
+			if(i<10){
+				var j='0'+i;
+			}
+			dayselect.innerHTML += '<option value='+j+'>' + i + '</option>';
+		}
+
+		var oms = document.getElementById("monthselect");
+		var om = parseInt(oms.options[oms.selectedIndex].value);
+		var nm = parseInt(t.options[t.selectedIndex].value);
+		
+		var ods = document.getElementById("dayselect");
+		var nds = document.getElementById("dayselectM");
+		var od = parseInt(ods.options[ods.selectedIndex].value);
+		
+		if (om > nm) {
+			window.alert('판매 시작 월 이후 숫자를 선택해주세요.');
+			t.options[oms.selectedIndex].selected = true;
+			nds.options[ods.selectedIndex+1].selected=true;
+		}
+
+		var fm = document.makeSellfm;
+		var start = document.makeSellfm.s_start;
+		var end = document.makeSellfm.s_end;
+
+		start.value = fm.s_year.options[fm.s_year.selectedIndex].value + "-"
+				+ fm.s_month.options[fm.s_month.selectedIndex].value + "-"
+				+ fm.s_date.options[fm.s_date.selectedIndex].value;
+		end.value = fm.e_year.options[fm.e_year.selectedIndex].value + "-"
+				+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
+				+ fm.e_date.options[fm.e_date.selectedIndex].value;
+	}
+
+	function selectD(t) {
+		var oms = document.getElementById("monthselect");
+		var nms = document.getElementById("monthselect2")
+		var om = parseInt(oms.options[oms.selectedIndex].value);
+		var nm = parseInt(nms.options[nms.selectedIndex].value);
+
+		var ods = document.getElementById("dayselect");
+		var od = parseInt(ods.options[ods.selectedIndex].value);
+		var nd = parseInt(t.options[t.selectedIndex].value);
+
+		if (om == nm && od > nd) {
+			window.alert('판매 시작 일 이후 숫자를 선택해주세요.');
+			t.options[ods.selectedIndex+1].selected = true;
+		}
+	
+		var fm = document.makeSellfm;
+		var start = document.makeSellfm.s_start;
+		var end = document.makeSellfm.s_end;
+		
+		start.value = fm.s_year.options[fm.s_year.selectedIndex].value + "-"
+				+ fm.s_month.options[fm.s_month.selectedIndex].value + "-"
+				+ fm.s_date.options[fm.s_date.selectedIndex].value;
+		end.value = fm.e_year.options[fm.e_year.selectedIndex].value + "-"
+				+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
+				+ fm.e_date.options[fm.e_date.selectedIndex].value;
+
+	}
+
+	function sellterm() {
+		var fm = document.makeSellfm;
+		var start = document.makeSellfm.s_start;
+		var end = document.makeSellfm.s_end;
+
+		start.value = fm.s_year.options[fm.s_year.selectedIndex].value + "-"
+				+ fm.s_month.options[fm.s_month.selectedIndex].value + "-"
+				+ fm.s_date.options[fm.s_date.selectedIndex].value;
+		end.value = fm.e_year.options[fm.e_year.selectedIndex].value + "-"
+				+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
+				+ fm.e_date.options[fm.e_date.selectedIndex].value;
+	}
+	
+	function tradeTime() {
+		var fm = document.makeSellfm;
+		
+		var vapT = fm.apT.options[fm.apT.selectedIndex].value;
+		var vwhenT = parseInt(fm.whenT.options[fm.whenT.selectedIndex].value);
+		var vapT2 = fm.apT2.options[fm.apT2.selectedIndex].value;
+		var vwhenT2 = parseInt(fm.whenT2.options[fm.whenT2.selectedIndex].value);
+console.log(vwhenT+"/"+vwhenT2);
+		if(vapT==vapT2){
+			if(vwhenT>vwhenT2){
+				
+				window.alert('이후 시간을 선택해주세요.');
+				fm.whenT2.options[fm.whenT.selectedIndex+1].selected="true";
+			}
+		} else if(vapT=="오후"&&vapT2=="오전"){
+			window.alert('마감 시간이 시작 시간보다 늦습니다.');
+			fm.apT2.options[fm.apT.selectedIndex].selected="true";
+		}
+		
+		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value+","
+		+ fm.apT.options[fm.apT.selectedIndex].value+","
+		+ fm.whenT.options[fm.whenT.selectedIndex].value+","
+		+ fm.apT2.options[fm.apT2.selectedIndex].value+","
+		+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
+	}
 </script>
 </head>
 <body>
@@ -293,13 +490,12 @@ ul {
 			<article>
 				<ul>
 					<li>섬네일 <img src="../img/img1.jpg" class="selectimg"></li>
-					<li>카테고리 <select>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
+					<li>카테고리 <select name="c_idx">
+							<option value="1">팬시</option>
+							<option value="2">문구</option>
+							<option value="3">액세서리</option>
 					</select>
-					<li>제목<input type="text">
-					<li>설명<input type="text">
+					<li>제목<input type="text" name="s_title">
 					<li>상세 설명
 						<div class="editor">
 							<div>
@@ -325,8 +521,9 @@ ul {
 							</div>
 							<div class="editbox">
 								<div style="text-align: left; cursor: text;">
-									<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서,
-										아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
+									<span id="txt" contenteditable="true" name="s_content">여름
+										장이란 애시당초에 글러서, 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로
+										등줄기를 훅훅 볶는다.</span>
 								</div>
 							</div>
 						</div>
@@ -334,25 +531,103 @@ ul {
 					<li>
 						<div>
 							<input type="radio" name="termbtn" value="every"
-								onclick="addterm(this.value)" checked>상시 판매 <input
-								type="radio" name="termbtn" value="term"
-								onclick="addterm(this.value)">기간 판매
+								onclick="addterm(this.value)" checked><label>상시
+								판매</label> <input type="radio" name="termbtn" value="term"
+								onclick="addterm(this.value)"><label>기간 판매</label>
 						</div>
 						<div id="duebox" class="fbox fcenter" style="display: none;">
-							<select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> ~ <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
+							<select name="s_year" onchange="sellterm()">
+								<%
+								Calendar now = Calendar.getInstance();
+								int y = now.get(Calendar.YEAR);
+								int m = now.get(Calendar.MONTH) + 1;
+								int d = now.get(Calendar.DATE);
+
+								String ms = "";
+								String ds = "";
+								if (m < 10) {
+									ms = "0" + m;
+								}
+								if (d < 10) {
+									ds = "0" + d;
+								}
+								%>
+								<option>2024</option>
+							</select> <select name="s_month" id="monthselect" onchange="selectM(this)">
+								<%
+								for (int i = 1; i <= 12; i++) {
+									if (i == m) {
+								%>
+								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="s_date" id="dayselect" onchange="sellterm()">
+								<%
+								for (int i = 1; i <= 31; i++) {
+									if (i == d) {
+								%>
+								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> ~ <select name="e_year" onchange="sellterm()">
+								<%
+								for (int i = y; i < y + 10; i++) {
+									if (i == y) {
+								%>
+								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="e_month" id="monthselect2"
+								onchange="selectMM(this)">
+								<%
+								for (int i = 1; i <= 12; i++) {
+									if (i == m) {
+								%>
+								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i<10?"0"+i:i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="e_date" id="dayselectM" onchange="selectD(this)">
+								<%
+								for (int i = 1; i <= 31; i++) {
+									if (i == d + 1) {
+								%>
+								<option selected value="<%=i<10?"0"+i:i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
 							</select>
-						</div>
+						</div> <input type="text" name="s_start" id="s_start"
+						value="<%=y + "-" + ms + "-" + ds%>"> <input type="text"
+						name="s_end" id="s_end" value="<%=(y + 99) + "-" + ms + "-" + ds%>">
 					</li>
 					<li>
 						<div class="fbox fcenter">
@@ -384,7 +659,7 @@ ul {
 								<li><input type="button" value="#c"
 									onclick="keySelect(this.value)"></li>
 							</ul>
-						</div>
+						</div> <input type="text" name="s_hash" value="#키워드#팬시">
 					</li>
 					<li>
 						<article id="optsbox">
@@ -435,18 +710,18 @@ ul {
 					</li>
 					<li>
 						<div>
-							판매 방법 <input type="checkbox" name="delivery" value="1">배송
-							<input type="checkbox" name="place" value="2"
-								onclick="addPlace()">현장 거래
+							판매 방법 <input type="checkbox" id="delivery" name="delivery"
+								value="1">배송 <input type="checkbox" id="place"
+								name="delivery" value="2" onclick="addPlace()">현장 거래
 							<div id="addplace" style="display: none;">
 								<div>
 									거래 희망 장소
 									<div>
-										<select>
-											<option>가동</option>
-											<option>나동</option>
-											<option>다동</option>
-											<option>라동</option>
+										<select id="whereT" onchange="tradeTime()">
+											<option>물감동</option>
+											<option>붓동</option>
+											<option>도화지동</option>
+											<option>연필동</option>
 										</select>
 									</div>
 								</div>
@@ -454,24 +729,31 @@ ul {
 									거래 가능 시간
 									<div>
 										<ul>
-											<li><select>
-													<option>1</option>
-											</select>일<select>
-													<option>오전</option>
-											</select><select>
-													<option>1</option>
+											<li><select name="apT" onchange="tradeTime()">
+													<option value="오전">오전</option>
+													<option value="오후">오후</option>
+											</select><select name="whenT" onchange="tradeTime()">
+											<%
+												for(int i=1; i<=12; i++){
+											%>
+													<option value="<%=i%>"><%=i %></option>
+											<% } %>
 											</select>시부터
 										</ul>
 										<ul>
-											<li><select>
-													<option>1</option>
-											</select>일<select>
-													<option>오전</option>
-											</select><select>
-													<option>1</option>
+											<li><select name="apT2" onchange="tradeTime()">
+													<option value="오전">오전</option>
+													<option value="오후">오후</option>
+											</select><select name="whenT2" onchange="tradeTime()">
+											<%
+												for(int i=1; i<=12; i++){
+											%>
+													<option value="<%=i%>"><%=i %></option>
+											<% } %>
 											</select>시까지
 										</ul>
 									</div>
+									<input type="text" name="s_trade" id="s_trade" value="">
 								</div>
 							</div>
 						</div>

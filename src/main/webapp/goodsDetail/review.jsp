@@ -44,14 +44,10 @@
 					리뷰 수
 					<div>11건</div>
 				</div></li>
-			<li><div>
-					통계
-					<div>그래프</div>
-				</div></li>
 		</ul>
 	</article>
 	<section>
-		<h2>리뷰 보기</h2>
+		<h2><a name="reviewpage"> 리뷰 보기</a></h2>
 		<article>
 			<ul class="reviewul fbox">
 				<li><a href="#"><img src="../img/img2.jpeg"></a></li>

@@ -33,7 +33,7 @@
                     File file = new File(mdao.getHomePath() + mdao.getUrl());
                     File[] fileList = file.listFiles();
                     String imgSrc = "";
-                    System.out.println(mdao.getHomePath());
+                    System.out.println(mdao.getHomePath());	
                     for (File f : fileList) {
                         if (f.isFile() && f.getName().startsWith(id)) {
                             imgSrc = "/wishJam/img/profile/"+f.getName();	//관리자이름이랑 같으면 경로지정하고 break

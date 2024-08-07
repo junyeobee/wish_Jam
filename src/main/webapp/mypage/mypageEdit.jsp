@@ -247,15 +247,13 @@ section {
 				mdao.setHomepath(path);
 				File file = new File(mdao.getHomepath() + mdao.getUrl());
 				File[] fileList = file.listFiles();
-				String imgSrc = "";
+				String imgSrc = "/wishJam/img/member_profile/default.png";
 				System.out.println(mdao.getHomepath());
 				for (File f : fileList) {
 					if (f.isFile()) {
 						imgSrc = "/wishJam/img/member_profile/seller.jpeg";
 						break;
 
-					} else {
-						imgSrc = "/wishJam/img/member_profile/default.png";
 					}
 				}
 
@@ -263,8 +261,16 @@ section {
 				%>
 				<div class="edit_item label">프로필 사진</div>
 				<div class="profileimg ">
-					<span class="edit">변경하기</span> <img src="<%= imgSrc%>"
+<<<<<<< HEAD
+					<span class="edit">변경하기</span> <img src="<%=imgSrc %>"
+=======
+<<<<<<< HEAD
+					<span class="edit">변경하기</span> <img src="<%=imgSrc%>" alt="mypageImg" onclick="modifyImg()">
+=======
+					<span class="edit">변경하기</span> <img src="<%=imgSrc%>"
+>>>>>>> e521c003e98c636fc7e8eaa770888f444e55fae3
 						alt="mypageImg" onclick="modifyImg()">
+>>>>>>> 5a165ae840c275cce8857a5f19ebdc350147175f
 				</div>
 
 			</article>
@@ -335,8 +341,8 @@ section {
 					<input type="button" name="bt_save" value="저장하기" id="bt">
 				</div>
 			</article>
-	</section>
 	</form>
+	</section>
 
 
 </body>
