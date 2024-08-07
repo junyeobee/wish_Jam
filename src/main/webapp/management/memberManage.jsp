@@ -2,7 +2,42 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "com.manage.wishJam.MemberExDTO" %>
 <%@ page import = "com.manage.wishJam.MemberExDAO" %>
+<script>
+    function openContent(idx) {
+        window.location='bbsContent.jsp?idx=' + idx;
+    }
+    
+    function writeContent(){
+    	window.location='bbsWrite.jsp';
+    }
+    
+</script>
+
 <%
+	MemberExDAO mexdao = new MemberExDAO();
+	ArrayList<MemberExDTO> arr = mexdao.allMem();
+	int e = mexdao.getTotalcnt();
+	String cp_s = request.getParameter("cp");
+	if(cp_s==null||cp_s.equals("")){
+		cp_s="1";
+	}
+	int cp = Integer.parseInt(cp_s);
+	
+	//총 게시물수
+	int totalcnt = mexdao.getTotalcnt();
+	//한번에 보여줄 리스트 수
+	int listsize = 10;
+	//페이지수
+	int pagesize = 5;
+	
+	//사용자 현재위치
+	//int cp=1;
+	
+	int totalpage = (totalcnt/listsize)+1;
+	if(totalcnt%listsize == 0)totalpage--;
+	
+	int usrgroup=cp/pagesize;
+	if(cp%pagesize==0)usrgroup--;
 	
 %>
 
@@ -27,8 +62,7 @@
 		</thead>
 		<tbody>
 			<%
-				MemberExDAO a = new MemberExDAO();
-				ArrayList<MemberExDTO> arr = a.allMem();
+				System.out.println(e);
 				if(arr!=null){
 					for(MemberExDTO dto : arr){
 					%>
@@ -39,10 +73,10 @@
 							<td><%=dto.getM_id() %></td>
 							<td><%=dto.getM_pwd() %></td>
 							<td><%=dto.getM_name() %></td>
-							<td><%=dto.getM_tel() %>6</td>
-							<td><%=dto.getM_addr() %>7</td>
-							<td><%=dto.getM_email() %>8</td>
-							<td><%=dto.getM_point() %>9</td>
+							<td><%=dto.getM_tel() %></td>
+							<td><%=dto.getM_addr() %></td>
+							<td><%=dto.getM_email() %></td>
+							<td><%=dto.getM_point() %></td>
 						</tr>
 					<%
 					}

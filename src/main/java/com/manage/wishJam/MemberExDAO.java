@@ -9,24 +9,26 @@ public class MemberExDAO {
 	public MemberExDAO() {
 		// TODO Auto-generated constructor stub
 	}
-	public int getMaxRef() {
+	public int getTotalcnt() {
 		try {
-			String sql = "select max(ref) from jsp_bbs";
+			con = com.db.wishJam.DbConn.getConn();
+			String sql = "select count(*) from member";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			int num = 0;
-			if(rs.next()) {
-				num = rs.getInt(1);
-			}
-			
-			return num;
+			rs.next();
+			int cnt = rs.getInt(1);			
+			return cnt==0?1:cnt;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return 0;
+			return 1;
 		}finally {
 			try {
-				if (rs != null)rs.close();
-				if (ps != null)ps.close();
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (con != null)
+					con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -60,6 +62,44 @@ public class MemberExDAO {
 				if (con != null)
 					con.close();
 			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<MemberExDTO> g(int cp, int ls) {
+		try {
+			con = com.db.wishJam.DbConn.getConn();
+			int start = (cp - 1) * ls + 1;
+			int end = cp * ls;
+			String sql = "select * from "
+					+ "(select rownum as rnm,a.* from  "
+					+ "(select * from jsp_bbs order by ref desc,sunbun asc) a)b "
+					+ "where rnm >=? and rnm <= ?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+			
+			ArrayList<MemberExDTO> arr = new ArrayList<MemberExDTO>();
+			while(rs.next()) {
+				MemberExDTO dto = new MemberExDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
