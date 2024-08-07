@@ -43,7 +43,7 @@
       text-align: left;
     }
     
-    .input_val{
+    .input_val {
       width: 60%;
       height: 46px;
       border-radius: 4px;
@@ -119,6 +119,21 @@
       font-size: 12px;
       font-family: 'Pretendard-Regular';
 	}
+	
+	.checkbox_group {
+	  text-align: left;
+	  margin-top: 8px;
+	  margin-left: 20px;
+	  font-family: 'Pretendard-Regular';
+	}
+	
+	.checkbox_top_line{
+	  padding-bottom: 15px;
+	}
+	
+	.checkbox_line {
+	  padding-bottom: 8px;
+	}
 </style>
 <script>
 function check_id() {
@@ -150,7 +165,6 @@ document.getElementById("id_check").addEventListener('click', check_id);
 </script>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
 <div class="join_wrap">
 	<div class="join_box">
 		<h2 style="color:#ff4900;">회 원 가 입</h2>
@@ -159,17 +173,16 @@ document.getElementById("id_check").addEventListener('click', check_id);
 			필수입력사항
 		</div>
 		<hr style="border: 2px solid #a9a9a9;width:850px;">
-		<form class="join_form" action="memberJoin_ok.jsp">
+		<form class="join_form" id="join_form" action="memberJoin_ok.jsp">
 		<div class="join_in_box">
 			<div class="input_title">
 				<label>아이디<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_id" name="m_id" value="아이디를 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_id" name="m_id" value="" placeholder="아이디를 입력해주세요" onfocus="this.placeholder='';">
 				<div class="input_alt_id" id="alt_id"></div>
 			</div>
 			<div class="input_btn">
-				<!-- <input type="submit" class="join_check" id="id_check" value="중복확인"> -->
 				<button type="button" class="join_check" id="id_check" onclick="check_id()">중복확인</button>
 			</div>
 		</div>
@@ -178,7 +191,8 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>비밀번호<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_pwd" name="m_pwd" value="비밀번호를 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_pwd" name="m_pwd" value="" placeholder="비밀번호를 입력해주세요" onfocus="this.placeholder='';">
+				<div class="input_alt_id" id="alt_pwd"></div>
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -187,7 +201,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>비밀번호확인<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" name="m_ckpwd" value="비밀번호를 한번 더 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_ckpwd" name="m_ckpwd" value="" placeholder="비밀번호를 한번 더 입력해주세요" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -196,7 +210,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>이름<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_name" name="m_name" value="이름을 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_name" name="m_name" value="" placeholder="이름을 입력해주세요" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -205,7 +219,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>닉네임</label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_nick" name="m_nick" value="닉네임을 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_nick" name="m_nick" value="" placeholder="닉네임을 입력해주세요" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -214,7 +228,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>휴대폰<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_tel" name="m_tel" maxlength="13" value="번호를 입력해주세요" onfocus="this.value='';" onkeyup="autoHyphen(value)">
+				<input type="text" class="join_input" id="m_tel" name="m_tel" value="" maxlength="13" placeholder="번호를 입력해주세요" onfocus="this.placeholder='';" onkeyup="autoHyphen(value)">
 			</div>
 			<div class="input_btn">
 				<input type="button" class="join_check" value="인증번호 받기">
@@ -225,7 +239,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>주소<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_addr" name="m_addr" value="주소를 입력해주세요" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_addr" name="m_addr" value="" placeholder="주소를 입력해주세요" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -234,7 +248,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>이메일<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_email" name="m_email" value="예시: wishjam@jam.com" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_email" name="m_email" placeholder="예시: wishjam@jam.com" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn">
 				<input type="button" class="join_check" value="중복확인">
@@ -257,7 +271,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>생년월일</label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_brd" name="m_brd" value="예시: YYYY/MM/DD" onfocus="this.value='';">
+				<input type="text" class="join_input" id="m_brd" name="m_brd" value="" placeholder="예시: YYYY/MM/DD" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -266,17 +280,87 @@ document.getElementById("id_check").addEventListener('click', check_id);
 			<div class="input_title">
 				<label>이용약관동의<span class="star_css">*</span></label>
 			</div>
+			<!-- 수정부분 -->
+			<div class="checkbox_group">
+				<div class="checkbox_top_line" style="color: blue;">
+			        <input type="checkbox" id="check_all" class="checkbox" onclick="noti_check();">
+			        <label for="check_all">전체 동의</label>
+			    </div>
+			    <div class="checkbox_line">
+			        <input type="checkbox" id="check_1" class="checkbox" onclick="noti_indicheck();">
+			        <label for="check_1">만 14세 이상입니다 (필수)</label>
+			    </div>
+			    <div class="checkbox_line">
+			        <input type="checkbox" id="check_2" class="checkbox" onclick="noti_indicheck();">
+			        <label for="check_2">이용약관 동의 (필수)</label>
+			    </div>
+			    <div class="checkbox_line">
+			        <input type="checkbox" id="check_3" class="checkbox" onclick="noti_indicheck();">
+			        <label for="check_3">개인정보 수집·이용 동의 (필수)</label>
+			    </div>
+		    </div>
+		    <!--  -->
 		</div>
 		<div style="margin:40px 275px 0px 275px;">
-			<button type="button"class="j_success" id="join_confirm">가입하기</button>
-			<!-- <input type="submit" class="j_success" id="join_confirm" value="가입하기"> -->
+			<button type="button" class="j_success" id="join_confirm">가입하기</button>
 		</div>
 		</form>
 	</div>
 </div>
-<%@ include file="../footer.jsp" %>
 </body>
 </html>
+<script>
+	// 비밀번호 정규식
+	function isPwd(pvalue) {
+		var regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+		
+		return regExp.test(pvalue);
+	}
+	
+	// 전화번호 정규식
+	function isPhoneNumber(pnValue) {
+		var cleanPhoneNumber = pnValue.replace(/-/g, '');
+		var regExp = /^01(?:0|1|[6-9])(?:\d{7}|\d{8})$/;
+	 
+		return regExp.test(cleanPhoneNumber);
+	}
+	
+	// 이메일 정규식
+	function isEmail(eValue) {
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	
+		return regExp.test(eValue);
+	}
+</script>
+<script>
+	document.getElementById("join_confirm").addEventListener('click', () => {
+		var id = document.getElementById("m_id").value;
+		var pwd = document.getElementById("m_pwd").value;
+		var ckpwd = document.getElementById("m_ckpwd").value;
+		var name = document.getElementById("m_name").value;
+		var tel = document.getElementById("m_tel").value;
+		var addr = document.getElementById("m_addr").value;
+		var email = document.getElementById("m_email").value;
+		var allck = document.getElementById("check_all");
+
+		if(id == "" || pwd == "" || name == "" || tel == "" || addr == "" || email == ""){
+			window.alert("필수 입력사항을 모두 기입해주세요.");
+		} else if(pwd != ckpwd){
+			window.alert("비밀번호가 일치하지 않습니다.");
+		} else if(!isPwd(pwd)){
+			window.alert("비밀번호 형식을 주의해서 입력해주세요.");
+		} else if(!isPhoneNumber(tel)){
+			window.alert("휴대폰 번호를 정확히 입력해주세요.");
+		} else if(!isEmail(email)){
+			window.alert("이메일 주소를 정확히 입력해주세요.");
+		} else if(!allck.checked){
+			window.alert("이용약관에 동의해주세요.");
+		} else {
+			document.getElementById("m_ckpwd").remove();
+			document.getElementById("join_form").submit();
+		}
+	});
+</script>
 <script>
 	// 휴대전화 하이픈 자동생성
 	const autoHyphen = (number) => {
@@ -301,13 +385,14 @@ document.getElementById("id_check").addEventListener('click', check_id);
 	    PHONE_INPUT_BOX.setAttribute('value', PHONE_NUMBER_WITH_HYPHEN);
 	  };
 </script>
-
 <script>
-	// 아이디 유효성 검사
 	var regexp = /^[a-z][a-z0-9]{3,13}$/;
 	var inputid = document.getElementById("m_id");
+	var inputpwd = document.getElementById("m_pwd");
 	var altid = document.getElementById("alt_id");
-
+	var altpwd = document.getElementById("alt_pwd");
+	
+	// 아이디 유효성 검사
 	inputid.addEventListener('keyup', ()=>{
 		if(inputid.value.trim() != "" && !regexp.test(inputid.value)) {
 			altid.innerText = "4~20자의 영문, 숫자만 사용할 수 있어요.";
@@ -323,4 +408,44 @@ document.getElementById("id_check").addEventListener('click', check_id);
 	        altid.classList.remove("error-text"); 
 		}
 	});	
+	
+	// 비밀번호 유효성 검사
+	inputpwd.addEventListener('keyup', ()=>{
+		if(inputpwd.value.trim() != "" && !isPwd(inputpwd.value)) {
+			altpwd.innerText = "비밀번호는 8자리 이상 20자리 이하의 영문/숫자/특수문자 조합으로 입력해주세요.";
+			altpwd.classList.add("error-text"); 
+			altpwd.classList.remove("info-text"); 
+		}else if(isPwd(inputpwd.value)) {
+			altpwd.innerText = "올바른 비밀번호 형식입니다.";
+			altpwd.classList.add("info-text"); 
+			altpwd.classList.remove("error-text"); 
+		}else {
+			altpwd.innerText = " ";
+			altpwd.classList.add("info-text"); 
+			altpwd.classList.remove("error-text"); 
+		}
+	});	
+</script>
+<script>
+	// 전체동의 확인 후 개별동의
+	function noti_check() {
+		var allck = document.getElementById("check_all");
+		var ck1 = document.getElementById("check_1");
+		var ck2 = document.getElementById("check_2");
+		var ck3 = document.getElementById("check_3");
+		
+		ck1.checked = allck.checked;
+        ck2.checked = allck.checked;
+        ck3.checked = allck.checked;
+	}
+	
+	// 개별상태 확인 후 전체동의
+	function noti_indicheck() {
+        var allck = document.getElementById("check_all");
+        var ck1 = document.getElementById("check_1");
+        var ck2 = document.getElementById("check_2");
+        var ck3 = document.getElementById("check_3");
+
+        allck.checked = ck1.checked && ck2.checked && ck3.checked;
+    }
 </script>
