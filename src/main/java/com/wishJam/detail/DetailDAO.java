@@ -30,9 +30,10 @@ public class DetailDAO {
 				Date s_end = rs.getDate("s_end");
 				int s_discnt = rs.getInt("s_discnt");
 				int s_type = rs.getInt("s_type");
+				String s_trade = rs.getString("s_trade");
 
 				DetailDTO dto = new DetailDTO(s_idx, m_nick, c_idx, g_name, s_title, s_content, s_hash, s_idx, c_idx,
-						s_start, s_end, s_discnt, s_type);
+						s_start, s_end, s_discnt, s_type, s_trade);
 
 				return dto;
 			} else {
@@ -58,7 +59,7 @@ public class DetailDAO {
 	public int addSellPage(DetailDTO dto) {
 		try {
 			conn = com.db.wishJam.DbConn.getConn();
-			String sql = "insert into sell values(sell_s_idx.nextval,?,?,?,?,?,?,0,0,?,?,0,1)";
+			String sql = "insert into sell values(sell_s_idx.nextval,?,?,?,?,?,?,0,0,?,?,0,1,?)";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getM_nick());
@@ -69,6 +70,7 @@ public class DetailDAO {
 			ps.setString(6, dto.getS_hash());
 			ps.setDate(7, dto.getS_start());
 			ps.setDate(8, dto.getS_end());
+			ps.setString(9, dto.getS_trade());
 
 			int count = ps.executeUpdate();
 
