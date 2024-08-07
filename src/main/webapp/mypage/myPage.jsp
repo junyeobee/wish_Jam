@@ -1,32 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.io.*"%>
 <!DOCTYPE html>
-<jsp:useBean id="mdto" class="com.mypage.wishJam.MypageDTO"></jsp:useBean>
-<%
-String id = "seller";
-
-session.setAttribute("userId", id);
-
-String path = request.getRealPath("/");
-mdto.setHomepath(path);
-File file = new File(mdto.getHomepath() + mdto.getUrl());
-
-File[] fileList = file.listFiles();
-String imgSrc = "/wishJam/img/member_profile/default.png";
-System.out.println(mdto.getHomepath());
-for (File f : fileList) {
-	if (f.isFile() && f.getName().startsWith(id)) {
-		imgSrc = "/wishJam/img/member_profile/" + f.getName();
-		break;
-	} else {
-		imgSrc = "/wishJam/img/member_profile/default.png";
-	}
-}
-System.out.println(imgSrc);
-%>
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -98,6 +72,9 @@ section {
 	margin-right: 0;
 }
 
+
+
+
 .nickname {
 	font-weight: 600;
 	font-size: 18px;
@@ -111,7 +88,7 @@ section {
 </style>
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
+<%@ include file="../header.jsp"%>
 
 	<section>
 		<h2>마이페이지</h2>
@@ -120,12 +97,10 @@ section {
 			<div id="mypage_wrap">
 				<div class="profile_item">등급</div>
 				<div class="profileimg">
-					<img src="<%=imgSrc%>">
+					<img src="/wishJam/img/profile.png">
 				</div>
 				<div class="profile_item nickname">닉네임</div>
-				<div class="profile_item edit"
-					onclick="location.href='/wishJam/mypage/mypageEdit.jsp'">정보
-					수정하기</div>
+				<div class="profile_item edit" onclick="location.href='/wishJam/mypage/mypageEdit.jsp'">정보 수정하기</div>
 
 			</div>
 
