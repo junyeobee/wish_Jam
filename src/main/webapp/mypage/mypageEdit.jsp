@@ -261,7 +261,12 @@ section {
 				%>
 				<div class="edit_item label">프로필 사진</div>
 				<div class="profileimg ">
+<<<<<<< HEAD
 					<span class="edit">변경하기</span> <img src="<%=imgSrc%>" alt="mypageImg" onclick="modifyImg()">
+=======
+					<span class="edit">변경하기</span> <img src="<%=imgSrc%>"
+						alt="mypageImg" onclick="modifyImg()">
+>>>>>>> 5a165ae840c275cce8857a5f19ebdc350147175f
 				</div>
 
 			</article>
