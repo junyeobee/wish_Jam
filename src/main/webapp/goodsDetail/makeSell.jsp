@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -149,10 +150,25 @@ ul {
 
 	function addterm(v) {
 		var duebox = document.getElementById("duebox");
-
+		var start = document.makeSellfm.s_start;
+		var end=document.makeSellfm.s_end;
+		
+		Date now = new Date();
+		var y = now.getFullYear();
+		var m = now.getMonth()+1;
+		var d = now.getDate();
+		
+		if(m<10){
+			m="0"+m;
+		}
+		if(d<10){
+			d="0"+d;
+		}
 		if (v == "term") {
 			duebox.style.display = "block";
 		} else if (v == "every") {
+			start.value=y+"-"+m+"-"+d;
+			end.value=(y+99)+"-"+m+"-"+d;
 			duebox.style.display = "none";
 		}
 	}
@@ -183,11 +199,6 @@ ul {
 
 		content.innerHTML = ad;
 	}
-
-	/* function rangeat(){
-		var se = document.getSelection();
-		console.log(se.)
-	} */
 
 	function upImage(v) {
 		var file = document.getElementById("uploadImg").files[0];
@@ -247,13 +258,16 @@ ul {
 					+ v
 					+ '</span> <span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
 		}
+		
+		var kwords = document.makeSellfm.s_hash;
+		s_hash.value+=v;
 	}
 
 	function clickBox() {
 		var kwedit = document.getElementById("kweditbox");
 
 		kwedit.focus();
-		kwedit.contentEditable='true';
+		kwedit.contentEditable = 'true';
 	}
 
 	function EnterforInput(e) {
@@ -265,10 +279,14 @@ ul {
 				kword.innerHTML += '<div class="fbox kwbtn"><span class="kword">#'
 						+ kwedit.innerText
 						+ '</span><span class="material-symbols-outlined kwicon" onclick="deletekw(this)">close</span></div>';
+				
+				var kwords = document.makeSellfm.s_hash;
+				s_hash.value+='#'+kwedit.innerText;
+				
 				kwedit.innerHTML = '';
 				kwedit.blur();
 			} else {
-				kwedit.contentEditable='false';
+				kwedit.contentEditable = 'false';
 			}
 		}
 	}
@@ -283,6 +301,95 @@ ul {
 	function deletekw(t) {
 		t.parentNode.remove();
 	}
+
+	function selectM(t) {
+		var m = parseInt(t.options[t.selectedIndex].value);
+		console.log(m);
+		var lastday = 0;
+		switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			lastday = 31;
+			break;
+		case 2:
+			lastday = 29;
+			break;
+		default:
+			lastday = 30;
+			break;
+		}
+
+		var dayselect = document.getElementById("dayselect");
+		dayselect.innerHTML = '';
+
+		for (var i = 1; i <= lastday; i++) {
+			dayselect.innerHTML += '<option>' + i + '</option>';
+		}
+	}
+
+	function selectMM(t) {
+		var m = parseInt(t.options[t.selectedIndex].value);
+		console.log(m);
+		var lastday = 0;
+		switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			lastday = 31;
+			break;
+		case 2:
+			lastday = 29;
+			break;
+		default:
+			lastday = 30;
+			break;
+		}
+
+		var dayselect = document.getElementById("dayselectM");
+		dayselect.innerHTML = '';
+
+		for (var i = 1; i <= lastday; i++) {
+			dayselect.innerHTML += '<option>' + i + '</option>';
+		}
+		
+		var oms = document.getElementById("monthselect");
+		var om = parseInt(oms.options[oms.selectedIndex].value);
+		var nm = parseInt(t.options[t.selectedIndex].value);
+		
+		if(om>nm){
+			window.alert('판매 시작 월 이후 숫자를 선택해주세요.');
+			t.options[t.selectedIndex].innerText=om+1;
+		}
+	}
+	
+	function selectD(t){
+		var ods = document.getElementById("dayselect");
+		var od = parseInt(ods.options[ods.selectedIndex].value);
+		var nd = parseInt(t.options[t.selectedIndex].value);
+		
+		if(od>nd){
+			window.alert('판매 시작 일 이후 숫자를 선택해주세요.');
+			t.options[t.selectedIndex].innerText=od+1;
+		}
+	}
+	
+	function sellterm(){
+		var fm = document.makeSellfm;
+		var start = document.makeSellfm.s_start;
+		var end=document.makeSellfm.s_end;
+		
+		start.value=fm.s_year.options[fm.s_year.selectedIndex].value+"-"+fm.s_month.options[fm.s_month.selectedIndex].value+"-"+fm.s_date.options[fm.s_date.selectedIndex].value;
+		end.value=fm.e_year.options[fm.e_year.selectedIndex].value+"-"+fm.e_month.options[fm.e_month.selectedIndex].value+"-"+fm.e_date.options[fm.e_date.selectedIndex].value;
+	}
 </script>
 </head>
 <body>
@@ -293,12 +400,12 @@ ul {
 			<article>
 				<ul>
 					<li>섬네일 <img src="../img/img1.jpg" class="selectimg"></li>
-					<li>카테고리 <select>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
+					<li>카테고리 <select name="c_idx">
+							<option value="1">팬시</option>
+							<option value="2">문구</option>
+							<option value="3">액세서리</option>
 					</select>
-					<li>제목<input type="text">
+					<li>제목<input type="text" name="s_title">
 					<li>설명<input type="text">
 					<li>상세 설명
 						<div class="editor">
@@ -325,7 +432,7 @@ ul {
 							</div>
 							<div class="editbox">
 								<div style="text-align: left; cursor: text;">
-									<span id="txt" contenteditable="true">여름 장이란 애시당초에 글러서,
+									<span id="txt" contenteditable="true" name="s_content">여름 장이란 애시당초에 글러서,
 										아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로 등줄기를 훅훅 볶는다.</span>
 								</div>
 							</div>
@@ -339,20 +446,88 @@ ul {
 								onclick="addterm(this.value)">기간 판매
 						</div>
 						<div id="duebox" class="fbox fcenter" style="display: none;">
-							<select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> ~ <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
-							</select> <select>
-								<option>1</option>
+							<select name="s_year" onchange="sellterm()">
+								<%
+								Calendar now = Calendar.getInstance();
+								int y = now.get(Calendar.YEAR);
+								int m = now.get(Calendar.MONTH) + 1;
+								int d = now.get(Calendar.DATE);
+								%>
+								<option>2024</option>
+							</select> <select name="s_month" id="monthselect" onchange="selectM(this)">
+								<%
+								for (int i = 1; i <= 12; i++) {
+									if (i == m) {
+								%>
+								<option selected value="<%=i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="s_date" id="dayselect" onchange="sellterm()">
+								<%
+								for (int i = 1; i <= 31; i++) {
+									if (i == d) {
+								%>
+								<option selected value="<%=i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> ~ <select name="e_year" onchange="sellterm()">
+								<%
+								for (int i = y; i < y + 10; i++) {
+									if (i == y) {
+								%>
+								<option selected value="<%=i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="e_month" onchange="selectMM(this)">
+								<%
+								for (int i = 1; i <= 12; i++) {
+									if (i == m) {
+								%>
+								<option selected value="<%=i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
+							</select> <select name="e_date" id="dayselectM" onchange="selectD(this)">
+								<%
+								for (int i = 1; i <= 31; i++) {
+									if (i == d + 1) {
+								%>
+								<option selected value="<%=i%>"><%=i%></option>
+								<%
+								} else {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+								}
+								}
+								%>
 							</select>
 						</div>
+						<input type="hidden" name="s_start" id="s_start">
+						<input type="hidden" name="s_end" id="s_end">
 					</li>
 					<li>
 						<div class="fbox fcenter">
@@ -385,6 +560,7 @@ ul {
 									onclick="keySelect(this.value)"></li>
 							</ul>
 						</div>
+						<input type="hidden" name="s_hash" value="#키워드#팬시">
 					</li>
 					<li>
 						<article id="optsbox">
@@ -435,8 +611,8 @@ ul {
 					</li>
 					<li>
 						<div>
-							판매 방법 <input type="checkbox" name="delivery" value="1">배송
-							<input type="checkbox" name="place" value="2"
+							판매 방법 <input type="checkbox" id="delivery"  name="delivery"value="1">배송
+							<input type="checkbox" id="place"  name="delivery"value="2"
 								onclick="addPlace()">현장 거래
 							<div id="addplace" style="display: none;">
 								<div>
