@@ -2,17 +2,6 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "com.manage.wishJam.MemberExDTO" %>
 <%@ page import = "com.manage.wishJam.MemberExDAO" %>
-<script>
-    function openContent(idx) {
-        window.location='bbsContent.jsp?idx=' + idx;
-    }
-    
-    function writeContent(){
-    	window.location='bbsWrite.jsp';
-    }
-    
-</script>
-
 <%
 	MemberExDAO mexdao = new MemberExDAO();
 	int e = mexdao.getTotalcnt();

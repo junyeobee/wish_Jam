@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action = "imgUpload_ok.jsp"name = "imgupload" method = "post" enctype="multipart/form-data">
+<form action = "imgUpload_ok.jsp" name = "imgupload" method = "post" enctype="multipart/form-data">
 	<fieldset>
 		<legend>파일올리기</legend>
 		<label>파일 선택</label>

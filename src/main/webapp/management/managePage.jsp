@@ -37,7 +37,7 @@
     }
     #manageNavbar {
         width: 200px;
-        height: 100vh;
+        height: auto;
         background-color: #212121;
         color: white;
         padding: 10px;
