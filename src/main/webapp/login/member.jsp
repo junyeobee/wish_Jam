@@ -37,6 +37,12 @@
       padding: 10px 10px;
     }
     
+    .join_tel_ckbox{
+      display: none;
+      width: 100%;
+      padding: 10px 10px;
+    }
+    
     .input_title{
       width: 15%;
       padding-top: 12px;
@@ -137,34 +143,96 @@
 </style>
 <script>
 function check_id() {
-    let formData = new FormData();
-    formData.append('m_id', document.getElementById("m_id").value);
-    
-    // 콘솔에 데이터 출력 (디버깅)
-    console.log([...formData]);
+    return new Promise((resolve, reject) => {
+        let formData = new URLSearchParams();
+        formData.append('m_id', document.getElementById("m_id").value);
 
-    fetch('idCheck_ok.jsp', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'error') {
-            alert(data.message);
-        } else if (data.status === 'success') {
-            alert(data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
+        fetch('idCheck_ok.jsp', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); 
+            } else {
+                throw new Error('Network response was not ok.');
+            }
+        })
+        .then(data => {
+            if (data.status === 'success') {
+            	alert(data.message);
+                resolve(); 
+            } else {
+                alert(data.message);
+                reject(new Error(data.message)); 
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            reject(error); 
+        });
     });
 }
 
-document.getElementById("id_check").addEventListener('click', check_id);
+function check_email() {
+	return new Promise((resolve, reject) => { 
+		let eformData = new URLSearchParams();
+		eformData.append('m_email', document.getElementById("m_email").value);
 
+		fetch('emailCheck_ok.jsp',{
+			method: 'POST',
+			body: eformData
+		})
+		.then(response => {
+			if (response.ok) {
+                return response.json(); 
+            } else {
+                throw new Error('Network response was not ok.');
+            }
+		})
+		.then(data => {
+			if(data.status == 'success'){
+				alert(data.message);
+				resolve();
+			} else{
+				alert(data.message);
+				reject(new Error(data.message)); 
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			reject(error); 
+		});
+	});
+}
+
+let randomNumber;
+
+function send_tel() {
+	randomNumber = Math.floor(Math.random() * 9000) + 1000;
+	alert(randomNumber);
+	var tel_ck = document.getElementById("tel_ckbox");
+	tel_ck.style.display = 'inline-flex';
+}
+
+function send_ck() {
+	var m_telck = document.getElementById("m_telck");
+	var tel_send = document.getElementById("tel_send");
+	var tel_cksend = document.getElementById("tel_cksend");
+	
+	if(randomNumber == m_telck.value){
+		alert("인증이 완료되었습니다.");
+		m_telck.disabled = true;
+		tel_cksend.disabled = true;
+		tel_send.disabled = true;
+	} else {
+		alert("인증에 실패하였습니다.");
+	}
+}
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="join_wrap">
 	<div class="join_box">
 		<h2 style="color:#ff4900;">회 원 가 입</h2>
@@ -183,7 +251,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<div class="input_alt_id" id="alt_id"></div>
 			</div>
 			<div class="input_btn">
-				<button type="button" class="join_check" id="id_check" onclick="check_id()">중복확인</button>
+				<button type="button" class="join_check" id="id_check" onclick="check_id();">중복확인</button>
 			</div>
 		</div>
 		<div class="join_in_box">
@@ -191,7 +259,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>비밀번호<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_pwd" name="m_pwd" value="" placeholder="비밀번호를 입력해주세요" onfocus="this.placeholder='';">
+				<input type="password" class="join_input" id="m_pwd" name="m_pwd" value="" placeholder="비밀번호를 입력해주세요" onfocus="this.placeholder='';">
 				<div class="input_alt_id" id="alt_pwd"></div>
 			</div>
 			<div class="input_btn"></div>
@@ -201,7 +269,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<label>비밀번호확인<span class="star_css">*</span></label>
 			</div>
 			<div class="input_val">
-				<input type="text" class="join_input" id="m_ckpwd" name="m_ckpwd" value="" placeholder="비밀번호를 한번 더 입력해주세요" onfocus="this.placeholder='';">
+				<input type="password" class="join_input" id="m_ckpwd" name="m_ckpwd" value="" placeholder="비밀번호를 한번 더 입력해주세요" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn"></div>
 		</div>
@@ -231,7 +299,16 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<input type="text" class="join_input" id="m_tel" name="m_tel" value="" maxlength="13" placeholder="번호를 입력해주세요" onfocus="this.placeholder='';" onkeyup="autoHyphen(value)">
 			</div>
 			<div class="input_btn">
-				<input type="button" class="join_check" value="인증번호 받기">
+				<button type="button" class="join_check" id="tel_send" onclick="send_tel();">인증번호 받기</button>
+			</div>
+		</div>
+		<div class="join_tel_ckbox" id="tel_ckbox">
+			<div class="input_title"></div>
+			<div class="input_val">
+				<input type="text" class="join_input" id="m_telck" name="m_telck" value="" maxlength="4" placeholder="인증번호를 입력해주세요" onfocus="this.placeholder='';">
+			</div>
+			<div class="input_btn">
+				<button type="button" class="join_check" id="tel_cksend" onclick="send_ck();">인증번호 확인</button>
 			</div>
 		</div>
 		<div class="join_in_box">
@@ -251,7 +328,7 @@ document.getElementById("id_check").addEventListener('click', check_id);
 				<input type="text" class="join_input" id="m_email" name="m_email" placeholder="예시: wishjam@jam.com" onfocus="this.placeholder='';">
 			</div>
 			<div class="input_btn">
-				<input type="button" class="join_check" value="중복확인">
+				<button type="button" class="join_check" id="email_check" onclick="check_email();">중복확인</button>
 			</div>
 		</div>
 		<div class="join_in_box">
@@ -307,9 +384,17 @@ document.getElementById("id_check").addEventListener('click', check_id);
 		</form>
 	</div>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
 <script>
+	// 아이디 정규식
+	function isId(ivalue) {
+		var regExp = /^[a-z][a-z0-9]{3,13}$/;
+		
+		return regExp.test(ivalue);
+	}
+	
 	// 비밀번호 정규식
 	function isPwd(pvalue) {
 		var regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
@@ -342,23 +427,69 @@ document.getElementById("id_check").addEventListener('click', check_id);
 		var addr = document.getElementById("m_addr").value;
 		var email = document.getElementById("m_email").value;
 		var allck = document.getElementById("check_all");
+		var m_telck = document.getElementById("m_telck");
 
 		if(id == "" || pwd == "" || name == "" || tel == "" || addr == "" || email == ""){
 			window.alert("필수 입력사항을 모두 기입해주세요.");
+		} else if(!isId(id)){
+			window.alert("아이디 형식을 주의해서 입력해주세요.");
 		} else if(pwd != ckpwd){
 			window.alert("비밀번호가 일치하지 않습니다.");
 		} else if(!isPwd(pwd)){
 			window.alert("비밀번호 형식을 주의해서 입력해주세요.");
 		} else if(!isPhoneNumber(tel)){
 			window.alert("휴대폰 번호를 정확히 입력해주세요.");
+		} else if(m_telck.disabled == false){
+			window.alert("휴대폰 인증을 해주세요.");
 		} else if(!isEmail(email)){
 			window.alert("이메일 주소를 정확히 입력해주세요.");
 		} else if(!allck.checked){
 			window.alert("이용약관에 동의해주세요.");
 		} else {
-			document.getElementById("m_ckpwd").remove();
-			document.getElementById("join_form").submit();
-		}
+			/**이부분 수정: 아이디 & 이메일 중복체크 알람창 안뜨게하기*/
+			// ID와 이메일 체크를 수행하고 폼 제출 결정
+	        Promise.allSettled([check_id(), check_email()])
+            .then(results => {
+                let idError = false;
+                let emailError = false;
+
+                // 결과를 체크하고 각 상태에 따라 오류를 설정
+                results.forEach((result, index) => {
+                    if (result.status === 'rejected') {
+                        if (index === 0) {
+                            idError = true; // ID 체크가 실패한 경우
+                        } else if (index === 1) {
+                            emailError = true; // 이메일 체크가 실패한 경우
+                        }
+                    } else {
+                        if (index === 0) {
+                            idError = false; 
+                        } else if (index === 1) {
+                            emailError = false; 
+                        }
+                    }
+                });
+
+                if (idError && emailError) {
+                    // ID와 이메일 체크 모두 실패한 경우
+                    window.alert("아이디와 이메일 중복확인을 해주세요.");
+                } else if (idError) {
+                    // ID 체크 실패한 경우
+                    window.alert("아이디 중복확인을 해주세요.");
+                } else if (emailError) {
+                    // 이메일 체크 실패한 경우
+                    window.alert("이메일 중복확인을 해주세요.");
+                } else {
+                    // 두 체크 모두 성공적일 경우
+                    document.getElementById("m_ckpwd").remove(); // 비밀번호 확인 요소 제거
+                    document.getElementById("join_form").submit(); // 폼 제출
+                }
+               ////////////////////////////////
+            }).catch(error => {
+	            // 체크가 실패할 경우
+	            console.error('Check failed:', error);
+	        });
+	    }
 	});
 </script>
 <script>
@@ -386,7 +517,6 @@ document.getElementById("id_check").addEventListener('click', check_id);
 	  };
 </script>
 <script>
-	var regexp = /^[a-z][a-z0-9]{3,13}$/;
 	var inputid = document.getElementById("m_id");
 	var inputpwd = document.getElementById("m_pwd");
 	var altid = document.getElementById("alt_id");
@@ -394,11 +524,11 @@ document.getElementById("id_check").addEventListener('click', check_id);
 	
 	// 아이디 유효성 검사
 	inputid.addEventListener('keyup', ()=>{
-		if(inputid.value.trim() != "" && !regexp.test(inputid.value)) {
-			altid.innerText = "4~20자의 영문, 숫자만 사용할 수 있어요.";
+		if(inputid.value.trim() != "" && !isId(inputid.value)) {
+			altid.innerText = "4~20자의 영문/숫자 조합으로 입력해주세요.";
 			altid.classList.add("error-text"); 
 	        altid.classList.remove("info-text"); 
-		}else if(regexp.test(inputid.value)) {
+		}else if(isId(inputid.value)) {
 			altid.innerText = "올바른 아이디 형식입니다.";
 			altid.classList.add("info-text"); 
 	        altid.classList.remove("error-text"); 
