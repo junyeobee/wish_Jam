@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%
+	int s_idx = 27;
+	String g_name = "Gadget";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +38,7 @@ body {
 
 .fcenter {
 	justify-content: center;
-}
+} 
 
 ul {
 	text-decoration: none;
@@ -140,6 +144,7 @@ ul {
 	function addSale() {
 		var salebtn = document.makeSellfm.addsale;
 		var salebox = document.getElementById('salebox');
+
 		if (salebtn.checked) {
 			salebox.style.display = "block";
 		} else {
@@ -151,9 +156,21 @@ ul {
 	function addterm(v) {
 		var duebox = document.getElementById("duebox");
 
+		var fm = document.makeSellfm;
+		var end = document.makeSellfm.s_end;
+
 		if (v == "term") {
+			end.value = fm.e_year.options[fm.e_year.selectedIndex].value + "-"
+					+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
+					+ fm.e_date.options[fm.e_date.selectedIndex].value;
+
 			duebox.style.display = "block";
 		} else if (v == "every") {
+			end.value = (parseInt(fm.e_year.options[fm.e_year.selectedIndex].value) + 99)
+					+ "-"
+					+ fm.e_month.options[fm.e_month.selectedIndex].value
+					+ "-"
+					+ fm.e_date.options[fm.e_date.selectedIndex - 1].value;
 
 			duebox.style.display = "none";
 		}
@@ -240,20 +257,20 @@ ul {
 		} else {
 			placediv.style.display = "none";
 		}
-		
+
 		var fm = document.makeSellfm;
-		
-		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value+","
-		+ fm.apT.options[fm.apT.selectedIndex].value+","
-		+ fm.whenT.options[fm.whenT.selectedIndex].value+","
-		+ fm.apT2.options[fm.apT2.selectedIndex].value+","
-		+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
+
+		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value
+				+ "," + fm.apT.options[fm.apT.selectedIndex].value + ","
+				+ fm.whenT.options[fm.whenT.selectedIndex].value + ","
+				+ fm.apT2.options[fm.apT2.selectedIndex].value + ","
+				+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
 	}
 
 	function addOpt() {
 		var optsbox = document.getElementById("optsbox");
 
-		optsbox.innerHTML += '<div class="fbox optbox" style="justify-content: space-between; border: 1px solid gray;"><div class="fbox"><img src="../img/img1.jpg" class="selectimg"><div><ul><li>이름 <input type="text"></li><li>가격 <input type="text">원</li><li><ul class="fbox"><li>판매 수량 <input type="text"></li><li>구매 제한 <input type="text"></li></ul></li></ul></div></div><span class="material-symbols-outlined icons" onclick="deleteOpt(this)">close</span></div>';
+		optsbox.innerHTML += '<div class="fbox optbox" style="justify-content: space-between; border: 1px solid gray;"><div class="fbox"><img src="../img/img1.jpg" class="selectimg"><div><ul><li>이름 <input type="text" name="sg_name"></li><li>가격 <input type="text" name="sg_price">원</li><li><ul class="fbox"><li>판매 수량 <input type="text" name="sg_count"></li><li>구매 제한 <input type="text" name="sg_limit" value="0"></li></ul></li></ul></div></div><span class="material-symbols-outlined icons" onclick="deleteOpt(this)">close</span></div>';
 	}
 
 	function deleteOpt(t) {
@@ -338,8 +355,8 @@ ul {
 		dayselect.innerHTML = '';
 
 		for (var i = 1; i <= lastday; i++) {
-			if(i<10){
-				var j='0'+i;
+			if (i < 10) {
+				var j = '0' + i;
 			}
 			dayselect.innerHTML += '<option value='+j+'>' + i + '</option>';
 		}
@@ -382,8 +399,8 @@ ul {
 		dayselect.innerHTML = '';
 
 		for (var i = 1; i <= lastday; i++) {
-			if(i<10){
-				var j='0'+i;
+			if (i < 10) {
+				var j = '0' + i;
 			}
 			dayselect.innerHTML += '<option value='+j+'>' + i + '</option>';
 		}
@@ -391,15 +408,15 @@ ul {
 		var oms = document.getElementById("monthselect");
 		var om = parseInt(oms.options[oms.selectedIndex].value);
 		var nm = parseInt(t.options[t.selectedIndex].value);
-		
+
 		var ods = document.getElementById("dayselect");
 		var nds = document.getElementById("dayselectM");
 		var od = parseInt(ods.options[ods.selectedIndex].value);
-		
+
 		if (om > nm) {
 			window.alert('판매 시작 월 이후 숫자를 선택해주세요.');
 			t.options[oms.selectedIndex].selected = true;
-			nds.options[ods.selectedIndex+1].selected=true;
+			nds.options[ods.selectedIndex + 1].selected = true;
 		}
 
 		var fm = document.makeSellfm;
@@ -426,13 +443,13 @@ ul {
 
 		if (om == nm && od > nd) {
 			window.alert('판매 시작 일 이후 숫자를 선택해주세요.');
-			t.options[ods.selectedIndex+1].selected = true;
+			t.options[ods.selectedIndex + 1].selected = true;
 		}
-	
+
 		var fm = document.makeSellfm;
 		var start = document.makeSellfm.s_start;
 		var end = document.makeSellfm.s_end;
-		
+
 		start.value = fm.s_year.options[fm.s_year.selectedIndex].value + "-"
 				+ fm.s_month.options[fm.s_month.selectedIndex].value + "-"
 				+ fm.s_date.options[fm.s_date.selectedIndex].value;
@@ -454,31 +471,52 @@ ul {
 				+ fm.e_month.options[fm.e_month.selectedIndex].value + "-"
 				+ fm.e_date.options[fm.e_date.selectedIndex].value;
 	}
-	
+
 	function tradeTime() {
 		var fm = document.makeSellfm;
-		
+
 		var vapT = fm.apT.options[fm.apT.selectedIndex].value;
 		var vwhenT = parseInt(fm.whenT.options[fm.whenT.selectedIndex].value);
 		var vapT2 = fm.apT2.options[fm.apT2.selectedIndex].value;
 		var vwhenT2 = parseInt(fm.whenT2.options[fm.whenT2.selectedIndex].value);
-console.log(vwhenT+"/"+vwhenT2);
-		if(vapT==vapT2){
-			if(vwhenT>vwhenT2){
-				
+		console.log(vwhenT + "/" + vwhenT2);
+		if (vapT == vapT2) {
+			if (vwhenT > vwhenT2) {
+
 				window.alert('이후 시간을 선택해주세요.');
-				fm.whenT2.options[fm.whenT.selectedIndex+1].selected="true";
+				fm.whenT2.options[fm.whenT.selectedIndex + 1].selected = "true";
 			}
-		} else if(vapT=="오후"&&vapT2=="오전"){
+		} else if (vapT == "오후" && vapT2 == "오전") {
 			window.alert('마감 시간이 시작 시간보다 늦습니다.');
-			fm.apT2.options[fm.apT.selectedIndex].selected="true";
+			fm.apT2.options[fm.apT.selectedIndex].selected = "true";
 		}
+
+		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value
+				+ "," + fm.apT.options[fm.apT.selectedIndex].value + ","
+				+ fm.whenT.options[fm.whenT.selectedIndex].value + ","
+				+ fm.apT2.options[fm.apT2.selectedIndex].value + ","
+				+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
+	}
+
+	function tradeway() {
+		var delivery = document.makeSellfm.delivery;
+		var s_type = document.makeSellfm.s_type;
 		
-		fm.s_trade.value = fm.whereT.options[fm.whereT.selectedIndex].value+","
-		+ fm.apT.options[fm.apT.selectedIndex].value+","
-		+ fm.whenT.options[fm.whenT.selectedIndex].value+","
-		+ fm.apT2.options[fm.apT2.selectedIndex].value+","
-		+ fm.whenT2.options[fm.whenT2.selectedIndex].value;
+		if (delivery[0].checked == true && delivery[1].checked == true) {
+			s_type.value="3";
+		} else if (delivery[0].checked == true && delivery[1].checked == false) {
+			s_type.value="1";
+		} else if (delivery[0].checked == false && delivery[1].checked == true) {
+			s_type.value="2";
+		} else {
+			s_type.value="0";
+		}
+	}
+	
+	function TXTtyping() {
+		var content = document.makeSellfm.s_content;
+		var txt = document.getElementById("txt");
+		content.value=txt.innerHTML;
 	}
 </script>
 </head>
@@ -486,7 +524,9 @@ console.log(vwhenT+"/"+vwhenT2);
 	<section>
 		<h2>게시글 작성</h2>
 
-		<form name="makeSellfm">
+		<form name="makeSellfm" action="makeSell_ok.jsp">
+		<input type="hidden" name="s_idx" value="<%=s_idx %>">
+		<input type="hidden" name="m_nick" value="인뿌삐">
 			<article>
 				<ul>
 					<li>섬네일 <img src="../img/img1.jpg" class="selectimg"></li>
@@ -521,10 +561,9 @@ console.log(vwhenT+"/"+vwhenT2);
 							</div>
 							<div class="editbox">
 								<div style="text-align: left; cursor: text;">
-									<span id="txt" contenteditable="true" name="s_content">여름
-										장이란 애시당초에 글러서, 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 전 휘장 밑으로
-										등줄기를 훅훅 볶는다.</span>
+									<span id="txt" contenteditable="true" oninput="TXTtyping()"></span>
 								</div>
+								<input type="hidden" name="s_content" value="">
 							</div>
 						</div>
 					</li>
@@ -558,11 +597,11 @@ console.log(vwhenT+"/"+vwhenT2);
 								for (int i = 1; i <= 12; i++) {
 									if (i == m) {
 								%>
-								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option selected value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								} else {
 								%>
-								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								}
 								}
@@ -572,11 +611,11 @@ console.log(vwhenT+"/"+vwhenT2);
 								for (int i = 1; i <= 31; i++) {
 									if (i == d) {
 								%>
-								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option selected value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								} else {
 								%>
-								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								}
 								}
@@ -586,11 +625,11 @@ console.log(vwhenT+"/"+vwhenT2);
 								for (int i = y; i < y + 10; i++) {
 									if (i == y) {
 								%>
-								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option selected value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								} else {
 								%>
-								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								}
 								}
@@ -601,11 +640,11 @@ console.log(vwhenT+"/"+vwhenT2);
 								for (int i = 1; i <= 12; i++) {
 									if (i == m) {
 								%>
-								<option selected value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option selected value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								} else {
 								%>
-								<option value="<%=i<10?"0"+i:i%>"><%=i%></option>
+								<option value="<%=i < 10 ? "0" + i : i%>"><%=i%></option>
 								<%
 								}
 								}
@@ -615,11 +654,11 @@ console.log(vwhenT+"/"+vwhenT2);
 								for (int i = 1; i <= 31; i++) {
 									if (i == d + 1) {
 								%>
-								<option selected value="<%=i<10?"0"+i:i%>"><%=i%></option>
+								<option selected value="<%=i < 10 ? "0" + i : i%>"><%=i%></option>
 								<%
 								} else {
 								%>
-								<option value="<%=i<10?("0"+i):i%>"><%=i%></option>
+								<option value="<%=i < 10 ? ("0" + i) : i%>"><%=i%></option>
 								<%
 								}
 								}
@@ -627,7 +666,8 @@ console.log(vwhenT+"/"+vwhenT2);
 							</select>
 						</div> <input type="text" name="s_start" id="s_start"
 						value="<%=y + "-" + ms + "-" + ds%>"> <input type="text"
-						name="s_end" id="s_end" value="<%=(y + 99) + "-" + ms + "-" + ds%>">
+						name="s_end" id="s_end"
+						value="<%=(y + 99) + "-" + ms + "-" + ds%>">
 					</li>
 					<li>
 						<div class="fbox fcenter">
@@ -670,34 +710,13 @@ console.log(vwhenT+"/"+vwhenT2);
 									<img src="../img/img1.jpg" class="selectimg">
 									<div>
 										<ul>
-											<li>이름 <input type="text"></li>
-											<li>가격 <input type="text">원
+											<li>이름 <input type="text" name="sg_name"></li>
+											<li>가격 <input type="text" name="sg_price">원
 											</li>
 											<li>
 												<ul class="fbox">
-													<li>판매 수량 <input type="text"></li>
-													<li>구매 제한 <input type="text"></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<span class="material-symbols-outlined icons"
-									onclick="deleteOpt(this)">close</span>
-							</div>
-							<div class="fbox optbox"
-								style="justify-content: space-between; border: 1px solid gray;">
-								<div class="fbox">
-									<img src="../img/img1.jpg" class="selectimg">
-									<div>
-										<ul>
-											<li>이름 <input type="text"></li>
-											<li>가격 <input type="text">원
-											</li>
-											<li>
-												<ul class="fbox">
-													<li>판매 수량 <input type="text"></li>
-													<li>구매 제한 <input type="text"></li>
+													<li>판매 수량 <input type="text" name="sg_count"></li>
+													<li>구매 제한 <input type="text" name="sg_limit" value="0"></li>
 												</ul>
 											</li>
 										</ul>
@@ -711,8 +730,10 @@ console.log(vwhenT+"/"+vwhenT2);
 					<li>
 						<div>
 							판매 방법 <input type="checkbox" id="delivery" name="delivery"
-								value="1">배송 <input type="checkbox" id="place"
-								name="delivery" value="2" onclick="addPlace()">현장 거래
+								value="1" onchange="tradeway()">배송 <input
+								type="checkbox" id="place" name="delivery" value="2"
+								onclick="addPlace()" onchange="tradeway()">현장 거래 <input
+								type="hidden" name="s_type" value="0">
 							<div id="addplace" style="display: none;">
 								<div>
 									거래 희망 장소
@@ -733,11 +754,13 @@ console.log(vwhenT+"/"+vwhenT2);
 													<option value="오전">오전</option>
 													<option value="오후">오후</option>
 											</select><select name="whenT" onchange="tradeTime()">
-											<%
-												for(int i=1; i<=12; i++){
-											%>
-													<option value="<%=i%>"><%=i %></option>
-											<% } %>
+													<%
+													for (int i = 1; i <= 12; i++) {
+													%>
+													<option value="<%=i%>"><%=i%></option>
+													<%
+													}
+													%>
 											</select>시부터
 										</ul>
 										<ul>
@@ -745,11 +768,13 @@ console.log(vwhenT+"/"+vwhenT2);
 													<option value="오전">오전</option>
 													<option value="오후">오후</option>
 											</select><select name="whenT2" onchange="tradeTime()">
-											<%
-												for(int i=1; i<=12; i++){
-											%>
-													<option value="<%=i%>"><%=i %></option>
-											<% } %>
+													<%
+													for (int i = 1; i <= 12; i++) {
+													%>
+													<option value="<%=i%>"><%=i%></option>
+													<%
+													}
+													%>
 											</select>시까지
 										</ul>
 									</div>
@@ -768,26 +793,26 @@ console.log(vwhenT+"/"+vwhenT2);
 									<ul>
 										<li><div class="bordbox">
 												<ul class="fbox fcenter">
-													<li><input type="checkbox" name="saleGoods"></li>
+													<li><input type="checkbox" name="sg_discnt" value="1"></li>
 													<li>이름</li>
 													<li>가격</li>
 												</ul>
 											</div></li>
 										<li><div class="bordbox">
 												<ul class="fbox fcenter">
-													<li><input type="checkbox" name="saleGoods"></li>
+													<li><input type="checkbox" name="sg_discnt" value="2"></li>
 													<li>이름</li>
 													<li>가격</li>
 												</ul>
 											</div></li>
 										<li>
 											<div>
-												할인률 <select>
-													<option>10%</option>
-													<option>20%</option>
-													<option>30%</option>
-													<option>40%</option>
-													<option>50%</option>
+												할인률 <select name="s_discnt">
+													<option value="10">10%</option>
+													<option value="20">20%</option>
+													<option value="30">30%</option>
+													<option value="40">40%</option>
+													<option value="50">50%</option>
 												</select>
 											</div>
 										</li>
@@ -800,8 +825,8 @@ console.log(vwhenT+"/"+vwhenT2);
 			<article style="position: fixed; bottom: 0;">
 				<table class="fbox fcenter">
 					<tr>
-						<td><input type="button" value="취소"></td>
-						<td><input type="button" value="등록"></td>
+						<td><input type="reset" value="취소"></td>
+						<td><input type="submit" value="등록"></td>
 				</table>
 			</article>
 		</form>

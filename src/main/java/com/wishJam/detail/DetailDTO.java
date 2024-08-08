@@ -40,7 +40,6 @@ public class DetailDTO {
 		this.s_trade = s_trade;
 	}
 
-
 	public String getS_trade() {
 		return s_trade;
 	}

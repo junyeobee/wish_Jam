@@ -3,6 +3,8 @@ package com.wishJam.detail;
 import java.sql.*;
 import java.util.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DetailDAO {
 
@@ -59,18 +61,21 @@ public class DetailDAO {
 	public int addSellPage(DetailDTO dto) {
 		try {
 			conn = com.db.wishJam.DbConn.getConn();
-			String sql = "insert into sell values(sell_s_idx.nextval,?,?,?,?,?,?,0,0,?,?,0,1,?)";
+			String sql = "insert into sell(s_idx, m_nick, c_idx, g_name, s_title, s_content, s_hash, s_start, s_end, s_discnt, s_type, s_trade) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, dto.getM_nick());
-			ps.setInt(2, dto.getC_idx());
-			ps.setString(3, dto.getG_name());
-			ps.setString(4, dto.getS_title());
-			ps.setString(5, dto.getS_content());
-			ps.setString(6, dto.getS_hash());
-			ps.setDate(7, dto.getS_start());
-			ps.setDate(8, dto.getS_end());
-			ps.setString(9, dto.getS_trade());
+			ps.setInt(1, dto.getS_idx());
+			ps.setString(2, dto.getM_nick());
+			ps.setInt(3, dto.getC_idx());
+			ps.setString(4, dto.getG_name());
+			ps.setString(5, dto.getS_title());
+			ps.setString(6, dto.getS_content());
+			ps.setString(7, dto.getS_hash());
+			ps.setDate(8, dto.getS_start());
+			ps.setDate(9, dto.getS_end());
+			ps.setInt(10, dto.getS_discnt());
+			ps.setInt(11, dto.getS_type());
+			ps.setString(12, dto.getS_trade());
 
 			int count = ps.executeUpdate();
 

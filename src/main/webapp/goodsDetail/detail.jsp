@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.wishJam.detail.DetailDTO"%>
+<%@ page import="com.wishJam.s_goods.S_goodsDTO"%>
 <%@ page import="java.util.*"%>
 <jsp:useBean id="ddao" class="com.wishJam.detail.DetailDAO"></jsp:useBean>
+<jsp:useBean id="sgdao" class="com.wishJam.s_goods.S_goodsDAO"></jsp:useBean>
+
 <%
-int sellidx = 23;
+int sellidx = 25;
 DetailDTO sddto = ddao.viewSellDetail(sellidx);
+ArrayList<S_goodsDTO> sglist = sgdao.viewGoods(sellidx);
 %>
 
 <!DOCTYPE html>
@@ -121,6 +125,10 @@ ul {
 	position: sticky;
 	top: 0;
 }
+
+.kwicon {
+	cursor: default;
+}
 </style>
 <script>
 	function openReport() {
@@ -145,7 +153,7 @@ ul {
 	function plusBtn(t) {
 		var amount = document.getElementsByName(t.name);
 		amount[1].value = parseInt(amount[1].value, 10) + 1;
-
+		console.log(t.name);
 		var price = parseInt(document.getElementById(t.name + '_p').innerText);
 
 		var lname = document.getElementById(t.name + '_gname');
@@ -156,7 +164,9 @@ ul {
 		if (lname == null) {
 			document.getElementById("option_table").innerHTML += '<div class="listable fbox"><table><tr><td id="'+t.name+'_gname">'
 					+ gname.innerText
-					+ '</td><td id="'+ t.name+'_price">4000원</td><td id="'+t.name+'_amount">'
+					+ '</td><td id="'+ t.name+'_price">'
+					+ price
+					+ '원</td><td id="'+t.name+'_amount">'
 					+ amount[1].value
 					+ '개</td></tr></table><span class="material-symbols-outlined kwicon" id="'
 					+ t.name + '" onclick="deleteGd(this)">close</span></div>';
@@ -190,7 +200,9 @@ ul {
 						+ gname.innerText
 						+ '</td><td id="'+t.name+'_amount">'
 						+ amount[1].value
-						+ '개</td><td id="'+ t.name+ '_price">4000원</td></tr></table><span class="material-symbols-outlined kwicon" id="'
+						+ '개</td><td id="'+ t.name+ '_price">'
+						+ price
+						+ '원</td></tr></table><span class="material-symbols-outlined kwicon" id="'
 						+ t.name
 						+ '" onclick="deleteGd(this)">close</span></div>';
 			} else if (gname.innerText == lname.innerText) {
@@ -209,24 +221,21 @@ ul {
 	<section class="option">
 		<article>
 			<form name="option">
-				<div>
-					<img class="boximg lfloat" src="../img/img2.jpeg">
-					<div id="sg_idx1_name">당근 스티커</div>
-					<div class="detail_price" id="sg_idx1_p">4000</div>
-					<input type="button" value="-" name="sg_idx1"
-						onclick="minusBtn(this)"> <input type="text"
-						name="sg_idx1" value="0"> <input type="button" value="+"
-						name="sg_idx1" onclick="plusBtn(this)">
-				</div>
+				<%
+				for (int i = 0; i < sglist.size(); i++) {
+				%>
 				<div class="fclear">
 					<img class="boximg lfloat" src="../img/img2.jpeg">
-					<div id="sg_idx2_name">당근 떡메모지</div>
-					<div class="detail_price" id="sg_idx2_p">2000</div>
-					<input type="button" value="-" name="sg_idx2"
+					<div id="sg_idx<%=i%>_name"><%=sglist.get(i).getSg_name()%></div>
+					<div class="detail_price" id="sg_idx<%=i%>_p"><%=sglist.get(i).getSg_price()%></div>
+					<input type="button" value="-" name="sg_idx<%=i%>"
 						onclick="minusBtn(this)"> <input type="text"
-						name="sg_idx2" value="0"> <input type="button" value="+"
-						name="sg_idx2" onclick="plusBtn(this)">
+						name="sg_idx<%=i%>" value="0"> <input type="button"
+						value="+" name="sg_idx<%=i%>" onclick="plusBtn(this)">
 				</div>
+				<%
+				}
+				%>
 			</form>
 		</article>
 		<article class="fclear">
