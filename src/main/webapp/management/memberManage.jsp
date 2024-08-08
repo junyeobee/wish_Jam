@@ -90,7 +90,7 @@
 			%>
 		</tbody>
 	</table>
-		<%
+<%
 	if(usrgroup != 0) {
 		%><a href="memberManage.jsp?cp=<%=(usrgroup-1)*pagesize+pagesize %>">&lt;&lt;</a><%
 	}

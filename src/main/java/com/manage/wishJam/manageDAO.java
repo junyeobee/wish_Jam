@@ -6,6 +6,7 @@ public class manageDAO {
 	private String homePath;
 	//4. 공통경로
 	private String url = "img/profile/";
+	private String banner = "img/banner/";
 	
 	public String getHomePath() {
 		return homePath;
@@ -15,6 +16,9 @@ public class manageDAO {
 	}
 	public String getUrl() {
 		return url;
+	}
+	public String getBanner() {
+		return banner;
 	}
 	public manageDAO() {
 	}
