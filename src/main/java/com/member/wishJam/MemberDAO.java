@@ -11,6 +11,11 @@ public class MemberDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	public static final int NOT_ID = 1;
+	public static final int NOT_PWD = 2;
+	public static final int LOGIN_OK = 3;
+	public static final int ERROR = -1;
+	
 	/** 회원가입 메서드 */
 	public int memberJoin(MemberDTO dto) {
 		try {
@@ -52,7 +57,7 @@ public class MemberDAO {
 			
 			String sql = " SELECT m_id "
 					+ " FROM member "
-					+ " WHERE m_id=? ";
+					+ " WHERE m_id = ? ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, m_id);
 			rs = ps.executeQuery();
@@ -71,5 +76,68 @@ public class MemberDAO {
 		}
 	}
 	
-	/***/
+	/** 이메일 중복검사 */
+	public boolean emailCheck(String m_email) {
+		try {
+			conn = com.db.wishJam.DbConn.getConn();
+			
+			String sql = " SELECT m_email "
+					+ " FROM member "
+					+ " WHERE m_email = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, m_email);
+			rs = ps.executeQuery();
+			return rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+	
+	/** 로그인 검증 */
+	public int loginCheck(String user_id, String user_pwd) {
+		try {
+			conn = com.db.wishJam.DbConn.getConn();
+			
+			String sql = " SELECT m_pwd "
+					+ " FROM member "
+					+ " WHERE m_id = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user_id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String dbpwd = rs.getString(1);
+				if(dbpwd.equals(user_pwd)) {
+					return LOGIN_OK;
+				} else {
+					return NOT_PWD;
+				}
+			} else {
+				return NOT_ID;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+	
+	
+	
+	
 }
