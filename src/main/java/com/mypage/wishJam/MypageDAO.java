@@ -1,38 +1,55 @@
 package com.mypage.wishJam;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.*;
 
 public class MypageDAO {
+   Connection con;
+   PreparedStatement ps;
+   ResultSet rs;
+   
+   //회원정보 수정
+//   public int memberEdit(MypageDTO dto) {
+//      
+//      try {
+//         con = com.db.wishJam.DbConn.getConn();
+//         
+//      } catch (Exception e) {
+//         // TODO: handle exception
+//      }
+//      
+//   }
+//   
 
-	private String homepath;
-	private String url = "img/member_profile/";
-	private String crpath;
-
-	public String getHomepath() {
-		return homepath;
-	}
-
-	public void setHomepath(String homepath) {
-		this.homepath = homepath;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-//	public void setUrl(String url) {
-//		this.url = url;
-//	}
-
-	public String getCrpath() {
-		return crpath;
-	}
-
-	public void setCrpath(String crpath) {
-		this.crpath = crpath;
-	}
-
-	public MypageDAO() {
-
-	}
-
+   
+   public List<MypageDTO> buyList(){
+      
+   List<MypageDTO> bl = new ArrayList();
+   
+   try {
+      con = com.db.wishJam.DbConn.getConn();
+      
+      String sql = "select * from test_goods";
+      ps=con.prepareStatement(sql);
+      rs=ps.executeQuery();
+      
+      while(rs.next()) {
+         int idx = rs.getInt("tg_idx");
+         String name= rs.getString("tg_name");
+         int price = rs.getInt("tg_price");
+         String seller = rs.getString("tg_seller");
+         String thumbnail_url=rs.getString("thumbnail_url");
+         
+         bl.add(new MypageDTO(idx, name, price, seller, thumbnail_url));
+         
+      }
+      
+   } catch (Exception e) {
+      e.printStackTrace();
+   }
+   return bl;
+      
+   }
 }

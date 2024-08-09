@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.wishJam.bestseller.BestsellerDTO" %>
+<%@ page import="java.util.*" %>
+
+<jsp:useBean id="bdao" class="com.wishJam.bestseller.BestsellerDAO"></jsp:useBean>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/wishJam/css/allFonts.css">
+<link rel="stylesheet" href="/wishJam/css/burger.css" />
+<link rel="stylesheet" href="/wishJam/css/index.css" />
 
 <style>
 section {
@@ -24,10 +32,6 @@ article div {
 	margin-right: 20px;
 }
 
-h2 {
-	font-family: 'Cafe24Ssurround';
-	margin-bottom: 50px;
-}
 
 #selllist_wrap {
 	width: 100%;

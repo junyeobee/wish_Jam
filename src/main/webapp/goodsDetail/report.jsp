@@ -3,7 +3,7 @@
 <%@ page import="com.wishJam.detail.DetailDTO"%>
 <jsp:useBean id="ddao" class="com.wishJam.detail.DetailDAO"></jsp:useBean>
 <%
-int sellidx = 23;
+int sellidx = 1;
 DetailDTO ddto = ddao.viewSellDetail(sellidx);
 %>
 
